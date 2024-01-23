@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-class PhoneBook
+class PhoneBook : public Contact
 {
 	private:
 		std::string contacts[8];
@@ -88,4 +88,22 @@ int	main(int argc, char **argv)
 	PhoneBook	phoneBook;
 	Contact		contact;
 
+	std::string	first, last, nick, num, secret;
+
+	std::cout << "Enter first name : ";
+	std::getline(std::cin, first);
+
+	std::cout << "Enter last name : ";
+	std::getline(std::cin, last);
+
+	std::cout << "Enter nickname : ";
+	std::getline(std::cin, first);
+
+	std::cout << "Enter phone number : ";
+	std::getline(std::cin, num);
+
+	std::cout << "Enter dark secret : ";
+	std::getline(std::cin, first);
+
+	return 0;
 }
