@@ -1,28 +1,46 @@
-NAME	=	megaphone
+NAME		=	megaphone
+CC			=	c++
+CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-SRC	=	megaphone.cpp
-OBJ	=	$(SRC:.cpp=.o)
+SRC_FILE	=	megaphone.cpp
 
-cpp	=	clang++
-RM	=	rm -f
-CPP_FLAGS	=	-Wall -Wextra -Werror -I.
+OBJ_DIR		=	obj/
+OBJ			=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.cpp=.o))
+OBJF		=	.cache_exists
 
-all	: $(NAME)
+CYAN_B		=	\033[1;96m
+CYAN		=	\033[0;96m
+GREEN_B		=	\033[1;32m
+DEFAULT		=	\033[0m
 
-$(NAME)	: $(OBJ)
-			$(CPP) $(CPP_FLAGS) -o $(NAME) $(OBJ)
+all				:	$(NAME)
 
-clean	:
-			$(RM) $(OBJ)
+$(NAME)			: $(OBJ) $(OBJF)
+					@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
+					@echo	"$(CYAN_B) - ex00 is compiled - $(DEFAULT)"
 
-fclean	:	clean
-			$(RM) $(NAME)
+$(OBJ_DIR)%.o	: %.cpp | $(OBJF)
+					@mkdir -p $(@D)
+					@$(CC) $(CPPFLAGS) -c $< -o $@
 
-re 		:	fclean $(NAME)
+$(OBJF)			:
+					@mkdir -p $(OBJ_DIR)
+					@touch $(OBJF)
 
-test:	$(NAME)
-			./megaphone "shhhhh... I think the students are asleep..."
-			./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
-			./megaphone
+clean			:
+					@rm -rf $(OBJ_DIR)
+					@rm	-rf	$(OBJF)
+					@echo "$(CYAN)- Object files are cleaned - $(DEFAULT)"
 
-.PHONY	:	all clean fclean re test	
+fclean			: clean
+					@rm -f $(NAME)
+					@echo "$(CYAN)- Executable files are cleaned - $(DEFAULT)"
+
+re				:	fclean all
+
+test			: $(NAME)
+					./megaphone "shhhhh... I think the students are asleep..."
+					./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
+					./megaphone
+
+.PHONY: all clean fclean re

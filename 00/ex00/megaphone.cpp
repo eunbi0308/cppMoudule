@@ -1,22 +1,22 @@
 #include <iostream>
 #include <string>
-#include <locale>
 
-int	main(int argc, char const *argv[])
+int	main(int argc, char **argv)
 {
-	if (argc == 1)
-	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << "\n";
-	}
-	else
+	if (argc > 1)
 	{
 		for (int i = 1; i < argc; i++)
 		{
-			std::string str(argv[i]);
-			for (int j = 0; j < str.length(); j++)
-				std::cout << (char)std::toupper(str[j]);
+			std::string myStr(argv[i]);
+			for (unsigned int j = 0; j < myStr.length(); j++)
+			{
+				std::cout << char(toupper(myStr[j]));
+			}
 		}
-		std::cout << std::endl;
 	}
-	return(0);
+	else
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+	
+	std::cout << "\n";
+	return 0;
 }
