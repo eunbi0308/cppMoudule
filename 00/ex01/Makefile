@@ -38,7 +38,4 @@ fclean			: clean
 
 re				:	fclean all
 
-test			: $(NAME)
-	
-
 .PHONY: all clean fclean re
