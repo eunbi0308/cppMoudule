@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <limits>
+#include <cstdlib> // atoi()
+#include <cstring> // for c_str
+#include <cctype> // isdigit()
 #include "phonebook.hpp"
 
 class Contact
@@ -21,6 +25,14 @@ class Contact
 			this->nickName = nickName;
 			this->phoneNumber = phoneNumber;
 			this->darkSecret = darkSecret;
+		}
+		void	clearContact()
+		{
+			firstName.clear();
+			lastName.clear();
+			nickName.clear();
+			phoneNumber.clear();
+			darkSecret.clear();
 		}
 		std::string getFirstName();
 		std::string getLastName();
@@ -62,7 +74,7 @@ void	PhoneBook::fillMaxContacts()
 				lastName1 = "Cho", 
 				nickName1 = "Zombie",
 				phoneNumber1 = "0638602453",
-				darkSecret1 = "She's cute";
+				darkSecret1 = "She can bite.";
 	std::string firstName2 = "Minie", 
 				lastName2 = "de Martines", 
 				nickName2 = "Dinosaurs", 
@@ -103,34 +115,49 @@ void	PhoneBook::fillMaxContacts()
 	add(createContact(firstName7, lastName7, nickName7, phoneNumber7, darkSecret7));
 }
 
+std::string getNonEmptyInput(const std::string& prompt)
+{
+    std::string input;
+
+	std::cout << prompt;
+	std::getline(std::cin, input);
+	if (input.empty())
+	{
+		do
+		{
+			std::cout << "\033[0;90mThis field cannot be empty.\n\033[0m";
+			std::cout << prompt;
+			std::getline(std::cin, input);
+		} while (input.empty());
+	}
+    return input;
+}
 
 Contact	createFromInput()
 {
 	std::string firstName, lastName, nickName, phoneNumber, darkSecret;
+	
+	firstName = getNonEmptyInput("\033[0;92mEnter first name : \n\033[0m >");
+    lastName = getNonEmptyInput("\033[0;92mEnter last name : \n\033[0m >");
+    nickName = getNonEmptyInput("\033[0;92mEnter nickname : \n\033[0m >");
+    phoneNumber = getNonEmptyInput("\033[0;92mEnter phone number : \n\033[0m >");
+    darkSecret = getNonEmptyInput("\033[0;92mEnter dark secret : \n\033[0m >");
 
-	std::cout << "\033[0;32mEnter first name : \n\033[0m >";
-	std::getline(std::cin, firstName);
-
-	std::cout << "\033[0;32mEnter last name : \n\033[0m >";
-	std::getline(std::cin, lastName);
-
-	std::cout << "\033[0;32mEnter nickname : \n\033[0m >";
-	std::getline(std::cin, nickName);
-
-	std::cout << "\033[0;32mEnter phone number : \n\033[0m >";
-	std::getline(std::cin, phoneNumber);
-
-	std::cout << "\033[0;32mEnter dark secret : \n\033[0m >";
-	std::getline(std::cin, darkSecret);
-
-	std::cout << "\033[1;32mA new contact is added. \n\n\033[0m";
+    std::cout << "\e[38;5;208mA new contact is added. \n\n\033[0m";
 
 	return Contact(firstName, lastName, nickName, phoneNumber, darkSecret);
 }
 
 void	PhoneBook::add(Contact contact)
 {
-	this->contacts[index % 8] = contact;
+	if (index < 8)
+		this->contacts[index] = contact;
+	else
+	{
+		int	oldestIndex = index % 8;
+		contacts[oldestIndex].clearContact();
+		contacts[oldestIndex] = contact;
+	}
 	this->index++;
 }
 
@@ -138,15 +165,18 @@ void	err(const char *msg)
 {
 	std::cerr << msg << std::endl;
 	std::cin.clear();
-	std::cin.ignore(1000, '\n');
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 void	printShortenName(const std::string &str)
 {
 	if (str.length() > 10)
-		std::cout << std::setw(9) << std::setfill(' ') << str.substr(0, 9) << '.';
+	{
+		std::string	shortenedName = str.substr(0, 9) + '.';
+		std::cout << std::setw(10) << std::setfill(' ') << shortenedName;
+	}
 	else
-		std::cout << std::setw(10) << str;
+		std::cout << std::setw(10) << std::setfill(' ') << str;
 }
 
 void	PhoneBook::printSummary()
@@ -154,7 +184,7 @@ void	PhoneBook::printSummary()
 	int	i = 0;
 
 	std::cout << std::endl; 
-	while (i < this->index)
+	while (i < this->index && i < 8)
 	{
 		std::cout << std::setw(10) << std::setfill(' ') << i;
 		std::cout << '|';
@@ -177,31 +207,48 @@ void	PhoneBook::printContactAllInfo(int index)
 	std::cout << "- Phone number		: " << contacts[index].getPhoneNumber() << std::endl;
 	std::cout << "- Darkest secret	: " << contacts[index].getDarkSecret() << std::endl;
 	std::cout << std::endl;
+	 // Clear input buffer
 	std::cin.clear();
-	std::cin.ignore(1000, '\n');
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+bool containsOnlyDigits(const std::string &str)
+{
+
+    for (std::string::const_iterator it = str.begin(); it != str.end(); ++it) {
+        if (*it < '0' || *it > '9') {
+            return false;
+        }
+    }
+    return true;
 }
 
 void	PhoneBook::search()
 {
-	int	index;
+	std::string	index;
 
 	if (this->index >= 1)
 	{
 		printSummary();
-		std::cout << "\033[0;32mType an index of a contact\n >\033[0m";
+		std::cout << "\033[0;92mEnter an index of a contact\n\033[0m >";
 		std::cin >> index;
-		if (index < 0 || index >= 8)
+		if (std::atoi(index.c_str()) < 0 || std::atoi(index.c_str()) >= 8)
 		{
-			err("\e[38;5;208mTyped index is out of bound.\n >\033[0m");
+			err("\033[1;91mTyped index is out of bound.\n\033[0m");
 			return ;
 		}
-		else if (this->index < index)
+		else if (containsOnlyDigits(index) == false)
 		{
-			err("\e[38;5;208mThe contact doesn't exist.\n >\033[0m");
+			err("\033[1;91mInvalid input. Enter a number.\n\033[0m");
+			return ;
+		}
+		else if (std::atoi(index.c_str()) > this->index)
+		{
+			err("\033[1;91mThe contact doesn't exist.\n\033[0m");
 			return ;
 		}
 		else
-			printContactAllInfo(index);
+			printContactAllInfo(std::atoi(index.c_str()));
 	}
 	else
 	{
@@ -243,7 +290,7 @@ int	main()
 
 	while (true)
 	{
-		std::cout << "\033[0;32mPlease enter a command : (ADD, SEARCH or EXIT)\n\033[0m >";
+		std::cout << "\033[0;92mPlease enter a command : (ADD, SEARCH or EXIT)\n\033[0m >";
 		std::getline(std::cin, cmd);
 		if (cmd == "TEST")
 			phoneBook.fillMaxContacts();
@@ -254,7 +301,7 @@ int	main()
 		else if (cmd == "EXIT")
 			break ;
 		else
-			std::cout << "\e[38;5;208mInvalid command\n\033[0m"; 
+			std::cout << "\033[1;91mInvalid command\n\033[0m"; 
 	}
 	return 0;
 }

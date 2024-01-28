@@ -1,6 +1,11 @@
 NAME		=	phonebook
 CC			=	c++
+
+ifdef DEBUG
+CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
+else
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
+endif
 
 SRC_FILE	=	phonebook.cpp
 
