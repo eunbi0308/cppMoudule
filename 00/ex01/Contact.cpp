@@ -36,13 +36,13 @@ Contact	createFromInput()
 {
 	std::string firstName, lastName, nickName, phoneNumber, darkSecret;
 	
-	firstName = getNonEmptyInput("\033[0;92mEnter first name : \n\033[0m >");
-    lastName = getNonEmptyInput("\033[0;92mEnter last name : \n\033[0m >");
-    nickName = getNonEmptyInput("\033[0;92mEnter nickname : \n\033[0m >");
-    phoneNumber = getNonEmptyInput("\033[0;92mEnter phone number : \n\033[0m >");
-    darkSecret = getNonEmptyInput("\033[0;92mEnter dark secret : \n\033[0m >");
+	firstName = getNonEmptyInput("Enter first name : \n");
+    lastName = getNonEmptyInput("Enter last name : \n");
+    nickName = getNonEmptyInput("Enter nickname : \n");
+    phoneNumber = getNonEmptyInput("Enter phone number : \n");
+    darkSecret = getNonEmptyInput("Enter dark secret : \n");
 
-    std::cout << "\e[38;5;208mA new contact is added. \n\n\033[0m";
+    std::cout << YELLOW << "A new contact is added. \n\n" << DEFAULT;
 
 	return Contact(firstName, lastName, nickName, phoneNumber, darkSecret);
 }

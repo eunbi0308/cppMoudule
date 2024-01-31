@@ -2,7 +2,7 @@
 
 void	err(const char *msg)
 {
-	std::cerr << msg << std::endl;
+	std::cerr << RED << msg << DEFAULT << std::endl;
 	std::cin.clear();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
@@ -17,8 +17,8 @@ std::string getNonEmptyInput(const std::string &prompt)
 	{
 		do
 		{
-			std::cout << "\033[0;90mThis field cannot be empty.\n\033[0m";
-			std::cout << prompt;
+			std::cout << GREY << "This field cannot be empty." << DEFAULT;
+			std::cout << GREEN << prompt << DEFAULT << " >";
 			std::getline(std::cin, input);
 		} while (input.empty());
 	}

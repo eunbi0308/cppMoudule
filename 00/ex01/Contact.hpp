@@ -1,6 +1,12 @@
 #ifndef CONTACT_H
 # define CONTACT_H
 
+# define GREEN "\033[0;92m"
+# define YELLOW "\e[38;5;208m"
+# define RED "\033[1;91m"
+# define GREY "\033[0;90m"
+# define DEFAULT "\033[0m"
+
 # include <iostream>
 # include <string>
 # include <limits>

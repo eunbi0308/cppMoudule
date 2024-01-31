@@ -54,21 +54,21 @@ void	PhoneBook::search()
 	if (this->index >= 1)
 	{
 		printSummary();
-		std::cout << "\033[0;92mEnter an index of a contact\n\033[0m >";
+		std::cout << GREEN << "Enter an index of a contact" << DEFAULT << " >";
 		std::cin >> index;
 		if (std::atoi(index.c_str()) < 0 || std::atoi(index.c_str()) >= 8)
 		{
-			err("\033[1;91mTyped index is out of bound.\n\033[0m");
+			err("Typed index is out of bound.\n");
 			return ;
 		}
 		else if (containsOnlyDigits(index) == false)
 		{
-			err("\033[1;91mInvalid input. Enter a number.\n\033[0m");
+			err("Invalid input. Enter a number.\n");
 			return ;
 		}
 		else if (std::atoi(index.c_str()) >= this->index)
 		{
-			err("\033[1;91mThe contact doesn't exist.\n\033[0m");
+			err("The contact doesn't exist.\n");
 			return ;
 		}
 		else
@@ -76,7 +76,7 @@ void	PhoneBook::search()
 	}
 	else
 	{
-		std::cout << "\e[38;5;208mThe phonebook is empty.\n\n\033[0m";
+		std::cout << YELLOW << "The phonebook is empty.\n\n" << DEFAULT;
 		return ;
 	}
 }
@@ -89,7 +89,7 @@ int	main()
 
 	while (true)
 	{
-		std::cout << "\033[0;92mPlease enter a command : (ADD, SEARCH or EXIT)\n\033[0m >";
+		std::cout << GREEN << "Please enter a command : (ADD, SEARCH or EXIT)\n\033[0m >";
 		std::getline(std::cin, cmd);
 		if (cmd == "TEST")
 			phoneBook.fillMaxContacts();
@@ -100,7 +100,7 @@ int	main()
 		else if (cmd == "EXIT")
 			break ;
 		else
-			std::cout << "\033[1;91mInvalid command\n\033[0m"; 
+			std::cout << RED << "Invalid command\n" << DEFAULT; 
 	}
 	return 0;
 }
