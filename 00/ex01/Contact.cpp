@@ -1,4 +1,4 @@
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 //Getter funcs
 std::string	Contact::getFirstName()

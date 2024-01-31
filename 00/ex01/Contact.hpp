@@ -25,14 +25,6 @@ class Contact
 			this->phoneNumber = phoneNumber;
 			this->darkSecret = darkSecret;
 		}
-		void	clearContact()
-		{
-			firstName.clear();
-			lastName.clear();
-			nickName.clear();
-			phoneNumber.clear();
-			darkSecret.clear();
-		}
 		std::string getFirstName();
 		std::string getLastName();
 		std::string	getNickName();
@@ -40,4 +32,6 @@ class Contact
 		std::string	getDarkSecret();
 };
 
+Contact	createContact(std::string firstName, std::string lastName, std::string nickName, 
+				std::string phoneNumber, std::string darkSecret);
 #endif

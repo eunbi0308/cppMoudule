@@ -1,6 +1,6 @@
 #include <cstdlib> // atoi()
 #include <cstring> // for c_str
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 void	PhoneBook::add(Contact contact)
 {
@@ -9,7 +9,6 @@ void	PhoneBook::add(Contact contact)
 	else
 	{
 		int	oldestIndex = index % 8;
-		contacts[oldestIndex].clearContact();
 		contacts[oldestIndex] = contact;
 	}
 	this->index++;
@@ -82,6 +81,7 @@ void	PhoneBook::search()
 	}
 }
 
+
 int	main()
 {
 	PhoneBook	phoneBook;
@@ -91,7 +91,9 @@ int	main()
 	{
 		std::cout << "\033[0;92mPlease enter a command : (ADD, SEARCH or EXIT)\n\033[0m >";
 		std::getline(std::cin, cmd);
-		if (cmd == "ADD")
+		if (cmd == "TEST")
+			phoneBook.fillMaxContacts();
+		else if (cmd == "ADD")
 			phoneBook.add(createFromInput());
 		else if (cmd == "SEARCH")
 			phoneBook.search();

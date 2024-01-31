@@ -1,7 +1,7 @@
 #ifndef PHONEBOOK_H
 # define PHONEBOOK_H
 
-# include "contact.hpp"
+# include "Contact.hpp"
 
 class PhoneBook
 {
@@ -14,6 +14,8 @@ class PhoneBook
 		void	add(Contact contact);
 		void	search();
 		void	printSummary();
+
+		void	fillMaxContacts();
 };
 
 /*** utils.cpp ***/

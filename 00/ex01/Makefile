@@ -7,13 +7,13 @@ else
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
 endif
 
-SRC_FILE	=	phonebook.cpp contact.cpp utils.cpp
+SRC_FILE	=	PhoneBook.cpp Contact.cpp utils.cpp test.cpp
 
 OBJ_DIR		=	obj/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.cpp=.o))
 OBJF		=	.cache_exists
 
-HEADERS		=	phonebook.hpp contact.hpp utils.cpp
+HEADERS		=	PhoneBook.hpp Contact.hpp
 
 CYAN_B		=	\033[1;96m
 CYAN		=	\033[0;96m
@@ -24,7 +24,7 @@ all				:	$(NAME)
 
 $(NAME)			: $(OBJ) $(OBJF)
 					@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
-					@echo	"$(CYAN_B) - ex00 is compiled - $(DEFAULT)"
+					@echo	"$(CYAN_B) - ex01 is compiled - $(DEFAULT)"
 
 $(OBJ_DIR)%.o	: %.cpp $(HEADERS)| $(OBJF)
 					@mkdir -p $(@D)
