@@ -7,7 +7,7 @@ else
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
 endif
 
-SRC_FILE	=	PhoneBook.cpp Contact.cpp utils.cpp test.cpp
+SRC_FILE	=	PhoneBook.cpp Contact.cpp utils.cpp test.cpp main.cpp
 
 OBJ_DIR		=	obj/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.cpp=.o))

@@ -17,7 +17,7 @@ std::string getNonEmptyInput(const std::string &prompt)
 	{
 		do
 		{
-			std::cout << GREY << "This field cannot be empty." << DEFAULT;
+			std::cout << GREY << "This field cannot be empty.\n" << DEFAULT;
 			std::cout << GREEN << prompt << DEFAULT << " >";
 			std::getline(std::cin, input);
 		} while (input.empty());

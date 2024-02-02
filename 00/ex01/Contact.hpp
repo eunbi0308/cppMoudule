@@ -23,14 +23,7 @@ class Contact
 	public:
 		Contact() {} //Default constructor
 		Contact(std::string firstName, std::string lastName, std::string nickName, 
-				std::string phoneNumber, std::string darkSecret)
-		{
-			this->firstName = firstName;
-			this->lastName = lastName;
-			this->nickName = nickName;
-			this->phoneNumber = phoneNumber;
-			this->darkSecret = darkSecret;
-		}
+		std::string phoneNumber, std::string darkSecret);
 		std::string getFirstName();
 		std::string getLastName();
 		std::string	getNickName();
