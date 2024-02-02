@@ -15,12 +15,11 @@ class Weapon
 	private:
 		std::string type;
 	public:
-		Weapom(std::string type)
-		{
-			this->type = type;
-		}
-		void	getType();
-		void	setType(std::string type);
-}
+		Weapon(std::string type);
+		~Weapon();
+	
+		std::string	getType();
+		void		setType(std::string type);
+};
 
 #endif
