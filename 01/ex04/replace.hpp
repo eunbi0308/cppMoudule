@@ -1,5 +1,4 @@
-#ifndef REPLACE_H
-# define REPLACE_H
+#pragma once
 
 # define GREEN "\033[0;92m"
 # define YELLOW "\e[38;5;208m"
@@ -12,5 +11,3 @@
 # include <string>
 
 void	replaceFile(const std::string &filename, const std::string &s1, const std::string &s2);
-
-#endif
