@@ -1,10 +1,10 @@
-NAME		=	harl
+NAME		=	harlFilter
 CC			=	c++
 
 ifdef DEBUG
-CPPFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g
+CPPFLAGS	=	-Wall -Wextra -Werror -Wno-implicit-fallthrough -fsanitize=address -g
 else
-CPPFLAGS	=	-Wall -Wextra -Werror
+CPPFLAGS	=	-Wall -Wextra -Werror -Wno-implicit-fallthrough
 endif
 
 SRC_FILE	=	main.cpp Harl.cpp
@@ -24,7 +24,7 @@ all				:	$(NAME)
 
 $(NAME)			: $(OBJ) $(OBJF)
 					@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
-					@echo	"$(CYAN_B) - ex05 is compiled - $(DEFAULT)"
+					@echo	"$(CYAN_B) - ex06 is compiled - $(DEFAULT)"
 
 $(OBJ_DIR)%.o	: %.cpp $(HEADERS) | $(OBJF)
 					@mkdir -p $(@D)
