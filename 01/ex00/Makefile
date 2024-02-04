@@ -2,9 +2,9 @@ NAME		=	ex00
 CC			=	c++
 
 ifdef DEBUG
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
+CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11 -fsanitize=address -g
 else
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
+CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 endif
 
 SRC_FILE	=	main.cpp Zombie.cpp newZombie.cpp randomChump.cpp

@@ -1,4 +1,4 @@
-NAME		=	harlFilter
+NAME		=	ex00
 CC			=	c++
 
 ifdef DEBUG
@@ -7,13 +7,13 @@ else
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11 -Wno-implicit-fallthrough
 endif
 
-SRC_FILE	=	main.cpp Harl.cpp
+SRC_FILE	=	main.cpp Fixed.cpp
 
 OBJ_DIR		=	obj/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.cpp=.o))
 OBJF		=	.cache_exists
 
-HEADERS		=	Harl.hpp
+HEADERS		=	Fixed.hpp
 
 CYAN_B		=	\033[1;96m
 CYAN		=	\033[0;96m
@@ -24,7 +24,7 @@ all				:	$(NAME)
 
 $(NAME)			: $(OBJ) $(OBJF)
 					@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
-					@echo	"$(CYAN_B) - ex06 is compiled - $(DEFAULT)"
+					@echo	"$(CYAN_B) - ex00 is compiled - $(DEFAULT)"
 
 $(OBJ_DIR)%.o	: %.cpp $(HEADERS) | $(OBJF)
 					@mkdir -p $(@D)

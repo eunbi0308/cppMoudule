@@ -12,15 +12,9 @@ class Zombie
 	private:
 		std::string name;
 	public:
-		Zombie(std::string name)
-		{
-			this->name = name;
-			std::cout << this->name << " has been created." << std::endl;
-		}
-		~Zombie()
-		{
-			std::cout << this->name << " has been destroyed." << std::endl;
-		}
+		Zombie();
+		~Zombie();
+		Zombie(std::string name);
 		void announce();
 };
 
