@@ -29,15 +29,15 @@ void	Harl::complain(std::string level)
 	};
 	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	int	i = 0;
-	while(i < 4)
+	while (i < 4)
 	{
 		if (levels[i] == level)
 		{
 			(this->*functionPtr[i])();
+			break ;
 		}
 		i++;
 	}
 	if (i == 4)
 		std::cerr << "Error: Invalid level entered - " << level << std::endl;
-	
 }
