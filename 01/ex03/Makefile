@@ -24,7 +24,7 @@ all				:	$(NAME)
 
 $(NAME)			: $(OBJ) $(OBJF)
 					@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
-					@echo	"$(CYAN_B) - ex00 is compiled - $(DEFAULT)"
+					@echo	"$(CYAN_B) - ex03 is compiled - $(DEFAULT)"
 
 $(OBJ_DIR)%.o	: %.cpp $(HEADERS) | $(OBJF)
 					@mkdir -p $(@D)

@@ -7,7 +7,6 @@
 # include <iostream>
 # include <string>
 # include <cstdlib> // atoi()
-# include <cstring> // for c_str
 
 class Zombie
 {
