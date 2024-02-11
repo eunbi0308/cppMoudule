@@ -14,7 +14,8 @@ Fixed::~Fixed()
 Fixed::Fixed(const Fixed &num)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	this->setRawBits(num.getRawBits());
+	// Using operator
+	*this = num;
 }
 
 Fixed &Fixed::operator=(const Fixed &num)
