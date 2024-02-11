@@ -1,8 +1,8 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 
 AAnimal::AAnimal()
 {
-	std::cout << "AAnimal Default constructor called." << std::endl;
+	std::cout << "Animal Default constructor called." << std::endl;
 	this->type = "";
 	this->brain = new Brain();
 	if (this->brain == nullptr)
@@ -11,13 +11,13 @@ AAnimal::AAnimal()
 
 AAnimal::AAnimal(const AAnimal &other)
 {
-	std::cout << "AAnimal Copy constructor called." << std::endl;
+	std::cout << "Animal Copy constructor called." << std::endl;
 	*this = other;
 }
 
 AAnimal &AAnimal::operator=(const AAnimal &other)
 {
-	std::cout << "AAnimal copy assignment operator called." << std::endl;
+	std::cout << "Animal copy assignment operator called." << std::endl;
 	if (this != &other)
 	{
 		if (this->brain != nullptr)
@@ -32,7 +32,7 @@ AAnimal &AAnimal::operator=(const AAnimal &other)
 
 AAnimal::~AAnimal()
 {
-	std::cout << "AAnimal Destructor called." << std::endl;
+	std::cout << "Animal Destructor called." << std::endl;
 	delete this->brain;
 }
 

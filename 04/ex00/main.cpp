@@ -5,7 +5,7 @@ int	main()
 {
 	{
 		std::cout << "------------- TEST 1 -------------" << std::endl;
-		Animal	myAnimal;
+		AAnimal	myAnimal;
 		Cat		myCat;
 		Dog		myDog;
 
@@ -16,9 +16,9 @@ int	main()
 	{
 		std::cout << std::endl;
 		std::cout << "------------- TEST 2 -------------" << std::endl;
-		const Animal* meta = new Animal();
-		const Animal* j = new Dog();
-		const Animal* i = new Cat();
+		const AAnimal* meta = new AAnimal();
+		const AAnimal* j = new Dog();
+		const AAnimal* i = new Cat();
 
 		std::cout << j->getType() << " " << std::endl;
 		std::cout << i->getType() << " " << std::endl;

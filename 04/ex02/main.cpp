@@ -5,8 +5,8 @@ int	main()
 {
 	// {
 	// 	std::cout << "------------- TEST 1 -------------" << std::endl;
-	// 	const Animal* j = new Dog();
-	// 	const Animal* i = new Cat();
+	// 	const AAnimal* j = new Dog();
+	// 	const AAnimal* i = new Cat();
 	// 	delete j;//should not create a leak
 	// 	delete i;
 	// }
@@ -14,7 +14,7 @@ int	main()
 	// 	std::cout << std::endl;
 	// 	std::cout << "------------- TEST 2 -------------" << std::endl;
 	// 	int				arraySize = 10;
-	// 	const Animal	*animalArray[arraySize];
+	// 	const AAnimal	*animalArray[arraySize];
 
 	// 	for (int i = 0; i < arraySize; i++)
 	// 	{
@@ -39,7 +39,7 @@ int	main()
 	// 	std::cout << "------------- TEST 3 -------------" << std::endl;
 	
 	// 	int				arraySize = 10;
-	// 	Animal	*animalArray[arraySize];
+	// 	AAnimal	*animalArray[arraySize];
 
 	// 	for (int i = 0; i < arraySize; i++)
 	// 	{
@@ -85,7 +85,7 @@ int	main()
 	{
 		std::cout << std::endl;
 		std::cout << "-------------- TEST 4 --------------" << std::endl;
-		std::cout << "Reference & Copy constructor" << std::endl;
+		std::cout << "    Reference & Copy constructor" << std::endl;
 		std::cout << "------------------------------------" << std::endl;
 
 		int		arraySize = 2;
@@ -204,7 +204,13 @@ int	main()
 		
 		for (int i = 0; i < arraySize; ++i) 
 		{
-			copyAnimalArray[i] = new AAnimal();
+			/** 
+			 	create an instance of an abstract class AAnimal, 
+				which is not allowed. Abstract classes are meant to be used 
+				as base classes and cannot be instantiated directly. 
+			**/
+			// copyAnimalArray[i] = new AAnimal();
+			copyAnimalArray[i] = new Cat();
 			*copyAnimalArray[i] = *animalArray[i];
 		}
 

@@ -2,6 +2,7 @@
 
 # include <iostream>
 # include <string>
+# include "Brain.hpp"
 
 # define GREEN "\033[0;92m"
 # define YELLOW "\e[38;5;208m"
@@ -16,12 +17,15 @@ class AAnimal
 {
 	protected:
 		std::string type;
+		Brain		*brain;
 	public:
 		AAnimal();
-		AAnimal(const AAnimal &);
-		AAnimal &operator=(const AAnimal &);
+		AAnimal(const AAnimal &other);
+		AAnimal &operator=(const AAnimal &other);
 		virtual ~AAnimal();
 
-		virtual void	makeSound() const;
+		// pure virtual function
+		virtual void	makeSound() const = 0;
 		std::string		getType() const;
+		Brain			*getBrain();
 };

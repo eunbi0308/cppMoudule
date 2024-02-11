@@ -6,7 +6,7 @@ Dog::Dog()
 	this->type = "Dog";
 }
 
-Dog::Dog(const Dog &) : Animal()
+Dog::Dog(const Dog &) : AAnimal()
 {
 	std::cout << GREEN << "Dog Copy constructor called." << DEFAULT  << std::endl;
 }

@@ -4,7 +4,7 @@
 // This allows us to perform a single action in different ways.
 
 //Base Class
-class Animal {
+class AAnimal {
 	public:
 		void animalSound() {
 			std::cout << "The animal makes a sound \n";
@@ -12,7 +12,7 @@ class Animal {
 };
 
 //Derived class
-class Pig : public Animal {
+class Pig : public AAnimal {
 	public:
 		void animalSound() {
 			std::cout << "The pig says: wee wee\n";
@@ -20,7 +20,7 @@ class Pig : public Animal {
 };
 
 //Derived class
-class Dog : public Animal {
+class Dog : public AAnimal {
 	public:
 		void animalSound() {
 			std::cout << "The dog says: bow wow \n";
@@ -29,7 +29,7 @@ class Dog : public Animal {
 
 int	main()
 {
-	Animal	myAnimal;
+	AAnimal	myAnimal;
 	Pig		myPig;
 	Dog		myDog;
 

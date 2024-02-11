@@ -2,7 +2,7 @@
 
 # include "Animal.hpp"
 
-class Cat : public Animal
+class Cat : public AAnimal
 {
 	public:
 		Cat();
