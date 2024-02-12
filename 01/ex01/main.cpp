@@ -4,7 +4,12 @@ int main(int argc, char **argv)
 {
 	if (argc == 2)
 	{
-		int N = std::atoi(argv[1]);
+		int N = std::stoi(argv[1]);
+		if (N <= 0)
+		{
+			std::cout << "Invalid number. Please enter a number above 0." << std::endl;
+			return EXIT_FAILURE;
+		}
 		Zombie*	horde = zombieHorde(N, "Roy");
 		delete [] horde;
 	}
