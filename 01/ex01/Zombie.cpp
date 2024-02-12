@@ -1,13 +1,13 @@
 #include "Zombie.hpp"
 
+Zombie::Zombie()
+{
+	std::cout << this->name << " has been created." << std::endl;
+}
+
 Zombie::~Zombie()
 {
 	std::cout << this->name << " has been destroyed." << std::endl;
-}
-
-void	Zombie::announceOfCreation()
-{
-	std::cout << this->name << " has been created." << std::endl;
 }
 
 void	Zombie::announce()

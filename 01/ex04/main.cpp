@@ -1,35 +1,17 @@
 #include "replace.hpp"
 
-std::string getNonEmptyInput(const std::string &prompt)
+int main (int argc, char **argv)
 {
-    std::string input;
-
-	std::cout << prompt;
-	std::getline(std::cin, input);
-	if (input.empty())
+	if (argc != 4)
 	{
-		do
-		{
-			std::cout << GREY << "This field cannot be empty.\n" << DEFAULT;
-			std::cout << prompt;
-			std::getline(std::cin, input);
-		} while (input.empty());
+		std::cout << RED << "USAGE : ./ex04 <filename> <s1> <s2>" << DEFAULT << std::endl;
+		return (EXIT_FAILURE);
 	}
-    return input;
-}
+	std::string filename = argv[1];
+	std::string s1 = argv[2];
+	std::string s2 = argv[3];
 
-int	main()
-{
-	std::string filename, s1, s2;
-
-	filename = getNonEmptyInput("Enter an input file name : ");
-	s1 = getNonEmptyInput("Enter a string that you want to replace : ");
-	s2 = getNonEmptyInput("Enter a replacement string : ");
-	if (s1 == s2)
-	{
-		std::cout << "The string you want to change is the same as the first string." << std::endl;
-		return (1);
-	}
 	replaceFile(filename, s1, s2);
-	return (0);
+
+	return 0;
 }

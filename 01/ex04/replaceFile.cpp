@@ -1,16 +1,24 @@
 #include "replace.hpp"
 
-std::string	replaceStr(std::string line, std::string str, size_t start, size_t end)
+bool	inputChecker(const std::string filename, const std::string s1, const std::string s2)
 {
-		std::string	replacedLine = line.substr(0, start);
-		replacedLine.append(str);
-		replacedLine.append(line.substr(end, line.length()));
-
-		return replacedLine;
+	if (filename.empty() || s1.empty() || s2.empty())
+	{
+		std::cout << RED << "Invalid input. input cannot be empty." << DEFAULT << std::endl;
+		return (false);
+	}
+	if (s1 == s2)
+	{
+		std::cout << RED << "The string you want to change is the same as the first string." << DEFAULT << std::endl;
+		return (false);
+	}
+	return (true);
 }
 
-void	replaceFile(const std::string &filename, const std::string &s1, const std::string &s2)
+void	replaceFile(const std::string filename, const std::string s1, const std::string s2)
 {
+	if (inputChecker(filename, s1, s2) == false)
+		return ;
 	// Open the input file
 	std::ifstream	inFile(filename);
 	if (!inFile.is_open())
@@ -33,7 +41,12 @@ void	replaceFile(const std::string &filename, const std::string &s1, const std::
 		size_t	end = s1.length();
 		while (line.find(s1, start) != std::string::npos)
 		{
-			line = replaceStr(line, s2, start, end);
+			// To replace only once.
+			if (start == end)
+				break ;
+			line.erase(start, start + end);
+			line.insert(start, s2);
+			start += end;
 		}
 		outFile << line << std::endl;
 	}

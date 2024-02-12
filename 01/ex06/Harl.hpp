@@ -14,7 +14,4 @@ class Harl
 		Harl() {}
 		~Harl() {}
 		void	complain(std::string level);
-		void	harlFilter(int index);
 };
-void	harlFilter(char *argv, Harl harl);
-typedef void (Harl::*MemberFunctionPtr)(void);

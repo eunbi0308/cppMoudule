@@ -17,7 +17,7 @@ void	HumanB::setWeapon(Weapon &weapon)
 	std::cout << YELLOW << "[" + this->weapon->getType() + "]" << " is set." << DEFAULT << std::endl;
 }
 
-void	HumanB::attack()
+void	HumanB::attack() const
 {
 	if (this->weapon)
 		std::cout << YELLOW << "HumanB " << this->name << " attacks with their "

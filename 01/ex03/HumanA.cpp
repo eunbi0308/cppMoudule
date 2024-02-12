@@ -11,7 +11,7 @@ HumanA::~HumanA()
 	std::cout << GREEN << "HumanA " << this->name << " is destroyed." << DEFAULT << std::endl;
 }
 
-void	HumanA::attack()
+void	HumanA::attack() const
 {
 	std::cout << GREEN << "HumanA " << this->name << " attacks with their " 
 				<< "[" + weapon.getType() + "]" << DEFAULT << std::endl;
