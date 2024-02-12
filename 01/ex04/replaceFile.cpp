@@ -37,16 +37,13 @@ void	replaceFile(const std::string filename, const std::string s1, const std::st
 	std::string line;
 	while (std::getline(inFile, line))
 	{
-		size_t	start = 0;
+		size_t	start;
 		size_t	end = s1.length();
-		while (line.find(s1, start) != std::string::npos)
+		while ((start = line.find(s1, 0)) != std::string::npos)
 		{
 			// To replace only once.
-			if (start == end)
-				break ;
 			line.erase(start, start + end);
 			line.insert(start, s2);
-			start += end;
 		}
 		outFile << line << std::endl;
 	}
