@@ -1,5 +1,12 @@
 #pragma once
 
+# define GREEN "\033[0;92m"
+# define YELLOW "\e[38;5;208m"
+# define RED "\033[1;91m"
+# define GREY "\033[0;90m"
+# define PURPLE	"\033[38;2;200;160;255m"
+# define DEFAULT "\033[0m"
+
 # include <iostream>
 # include <cmath>
 
@@ -17,12 +24,8 @@ class Fixed
 		~Fixed();
 
 		int		getRawBits(void) const;
-		void	setRawBits(int const raw);
-
-		float	toFloat(void) const;
 		int		toInt(void)	const;
+		float	toFloat(void) const;
 };
 
-// Car car1 = new Car("blue", 4);
-// Car car2 = car1;
-// Car car3 = new Car(&car1); <- copy constructor : copy all the values of car1
+std::ostream& operator<<(std::ostream& output, const Fixed& fixedPoint);

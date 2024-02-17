@@ -2,28 +2,34 @@
 
 Fixed::Fixed()
 {
-	std::cout << "Default costructor called" << std::endl; 
+	std::cout << GREY << "Default costructor called" << DEFAULT << std::endl; 
 	this->fixedPointNumber = 0;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl; 
+	std::cout << GREY << "Destructor called" << DEFAULT << std::endl; 
 }
 
 Fixed::Fixed(const Fixed &num)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << YELLOW << "Copy constructor called" << DEFAULT << std::endl;
 	*this = num;
 }
 
+/*
+*	A constructor that takes a constant integer as a parameter.
+*	It converts it to the corresponding fixed-point value.
+*/
 Fixed::Fixed(const int intNumber)
 {
-	std::cout << "Int constructor called" << std::endl;
+	std::cout << PURPLE << "Int constructor called" << DEFAULT << std::endl;
+	// Making 8 bits of space to express as a fixed point number.
 	this->fixedPointNumber = intNumber << fractionalBits;
 }
 
 /*	
+*	A constructor that takes a constant floating-point number as a parameter.
 *	in IEEE 754, for floating-point number, Single(32 bits) and
 *	Double Precision(64 bits) are commonly used formats. 
 *
@@ -33,18 +39,21 @@ Fixed::Fixed(const int intNumber)
 *	multiply it by 2^8 (which is 256).
 *	(1 << fractionalBits) is a bitwise left shift operation, 
 *	which effectively computes 2^fractionalBits.
-*	When the binary point is shifted to left by a 1 bit position,
-*	the exponent will be increased by 1.
+*	To consider and process the bit itself as an integer, 
+*	not to convert a real number into an integer
+*	
+*	1 << 8 == 256
 */
 Fixed::Fixed(const float floatNumber)
 {
-	std::cout << "Float constructor called" << std::endl;
+	std::cout << PURPLE << "Float constructor called" << DEFAULT << std::endl;
+								// floatNumber * 2^3(= 256);
 	this->fixedPointNumber = roundf(floatNumber * (1 << fractionalBits));
 }
 
 Fixed &Fixed::operator=(const Fixed &num)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << YELLOW << "Copy assignment operator called" << DEFAULT << std::endl;
 	if (this != &num)
 		this->fixedPointNumber = num.getRawBits();
 	return *this;
@@ -52,21 +61,27 @@ Fixed &Fixed::operator=(const Fixed &num)
 
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	std::cout << GREEN << "getRawBits member function called" << DEFAULT << std::endl;
 	return this->fixedPointNumber;
 }
 
-void	Fixed::setRawBits(int const raw)
-{
-	this->fixedPointNumber = raw;
-}
-
+// It converts the fixed-point value to an integer value.
 int	Fixed::toInt(void)	const
 {
+	// It's same as  fixedPointNumber / 2^3 (= 256)
 	return this->fixedPointNumber >> fractionalBits;
 }
 
+// It converts the fixed-point value to a floating-point value.
 float	Fixed::toFloat(void) const
 {
+	// It's same as  (float)fixedPointNumber / 2^3 (= 256)
 	return ((float)this->fixedPointNumber / (float)(1 << fractionalBits));
+}
+
+// It inserts a floating-point representation of the fixed-point number into the output stream object
+std::ostream& operator<<(std::ostream& output, const Fixed& fixedPoint)
+{
+	output << fixedPoint.toFloat();
+	return output;
 }

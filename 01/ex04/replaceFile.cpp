@@ -37,7 +37,7 @@ void	replaceFile(const std::string filename, const std::string s1, const std::st
 	std::string line;
 	while (std::getline(inFile, line))
 	{
-		int searchPosition = 0;
+		int 	searchPosition = 0;
 		size_t	start;
 		size_t	end = s1.length();
 		while ((start = line.find(s1, searchPosition)) != std::string::npos)

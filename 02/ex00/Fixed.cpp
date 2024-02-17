@@ -6,11 +6,6 @@ Fixed::Fixed()
 	this->fixedPointNumber = 0;
 }
 
-Fixed::~Fixed()
-{
-	std::cout << "Destructor called" << std::endl; 
-}
-
 Fixed::Fixed(const Fixed &num)
 {
 	std::cout << "Copy constructor called" << std::endl;
@@ -26,6 +21,12 @@ Fixed &Fixed::operator=(const Fixed &num)
 	return *this;
 }
 
+Fixed::~Fixed()
+{
+	std::cout << "Destructor called" << std::endl; 
+}
+
+/*** Functions ***/
 int	Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
