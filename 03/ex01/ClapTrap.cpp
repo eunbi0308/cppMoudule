@@ -5,7 +5,7 @@
 
 ClapTrap::ClapTrap()
 {
-	std::cout << GREY << "Default constructor called" << DEFAULT << std::endl; 
+	std::cout << GREY << "ClapTrap constructor called" << DEFAULT << std::endl; 
 }
 
 ClapTrap::ClapTrap(std::string name)

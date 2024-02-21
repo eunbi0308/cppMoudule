@@ -62,8 +62,8 @@ int main( void )
 		std::cout << RED << "----- Max/Min integer value" << DEFAULT << std::endl;
 
 		// 32 bit
-		Fixed	max(INT32_MAX);
-		Fixed	min(INT32_MIN);
+		Fixed	max(8388600);
+		Fixed	min(-8388606);
 
 		std::cout << "max is " << max << std::endl;
 		std::cout << "min is " << min << std::endl;
