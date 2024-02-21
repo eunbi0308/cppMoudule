@@ -19,8 +19,3 @@ class Fixed
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 };
-
-
-// Car car1 = new Car("blue", 4);
-// Car car2 = car1;
-// Car car3 = new Car(&car1); <- copy constructor : copy all the values of car1
