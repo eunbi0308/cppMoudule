@@ -1,7 +1,5 @@
 #include "ClapTrap.hpp"
 #include <iostream>
-#include <cxxabi.h>
-#include <typeinfo>
 
 ClapTrap::ClapTrap()
 {

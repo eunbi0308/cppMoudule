@@ -12,5 +12,5 @@ class ScavTrap : public ClapTrap
 		~ScavTrap();
 
 		std::string getType() const;
-		void	guardGate();
+		void		guardGate();
 };

@@ -12,5 +12,5 @@ class FragTrap : public ClapTrap
 		~FragTrap();
 	
 		std::string getType() const;
-		void	highFivesGuys(void);
+		void		highFivesGuys(void);
 };
