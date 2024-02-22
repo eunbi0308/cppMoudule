@@ -29,10 +29,10 @@ class Fixed
 		bool operator==(const Fixed &num) const;
 		bool operator!=(const Fixed &num) const;
 		// arithmetic operators
-		Fixed operator+(const Fixed &num) const;
-		Fixed operator-(const Fixed &num) const;
-		Fixed operator*(const Fixed &num) const;
-		Fixed operator/(const Fixed &num) const;
+		Fixed operator+(const Fixed &num);
+		Fixed operator-(const Fixed &num);
+		Fixed operator*(const Fixed &num);
+		Fixed operator/(const Fixed &num);
 		// increment operators
 		Fixed operator++(int); // Post
 		Fixed operator++(void); // Pre
@@ -49,6 +49,7 @@ class Fixed
 		~Fixed();
 
 		int		getRawBits(void) const;
+		void 	setRawBits(int num);
 		int		toInt(void)	const;
 		float	toFloat(void) const;
 };

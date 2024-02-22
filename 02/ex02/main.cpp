@@ -69,6 +69,19 @@ int main( void )
 	}
 	{
 		std::cout << std::endl;
+		std::cout << RED << "Extra Arithmetic with Float Test" << DEFAULT << std::endl;
+		Fixed		a(134635.246f);
+
+		std::cout << a << std::endl;
+		a = a + Fixed(1.0f);
+		std::cout << a << std::endl;
+		int n = 256;
+		while (n--)
+			a = a - Fixed((1.0f/256.0f));
+		std::cout << a << std::endl;
+	}
+	{
+		std::cout << std::endl;
 		std::cout << RED << "Increment/Decrement Test" << DEFAULT << std::endl;
 		Fixed	a(10);
 		Fixed	b(10);

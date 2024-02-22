@@ -1,4 +1,5 @@
 #include "Fixed.hpp"
+#include <climits>
 
 Fixed::Fixed()
 {
@@ -44,6 +45,11 @@ int	Fixed::getRawBits(void) const
 {
 	// std::cout << GREEN << "getRawBits member function called" << DEFAULT << std::endl;
 	return this->fixedPointNumber;
+}
+
+void Fixed::setRawBits(int num)
+{
+	this->fixedPointNumber = num;//.getRawBits();
 }
 
 // It converts the fixed-point value to an integer value.
@@ -99,24 +105,42 @@ bool Fixed::operator!=(const Fixed &num) const
 }
 
 /** Arithmetic operators **/
-Fixed Fixed::operator+(const Fixed &num) const
+Fixed Fixed::operator+(const Fixed &num)
 {
-	return Fixed(this->toFloat() + num.toFloat());
+	Fixed	result;
+	result.setRawBits(this->getRawBits() + num.getRawBits());
+
+	return result;
 }
 
-Fixed Fixed::operator-(const Fixed &num) const
+Fixed Fixed::operator-(const Fixed &num)
 {
-	return Fixed(this->toFloat() - num.toFloat());
+	Fixed	result;
+	result.setRawBits(this->getRawBits() - num.getRawBits());
+
+	return result;
 }
 
-Fixed Fixed::operator*(const Fixed &num) const
+Fixed Fixed::operator*(const Fixed &num)
 {
-	return Fixed(this->toFloat() * num.toFloat());
+	Fixed	result;
+	result.setRawBits((this->getRawBits() * num.getRawBits()) >> fractionalBits);
+
+	return result;
 }
 
-Fixed Fixed::operator/(const Fixed &num) const
+Fixed Fixed::operator/(const Fixed &num)
 {
-	return Fixed(this->toFloat() / num.toFloat());
+	// Handle division by zero error
+	if (num.getRawBits() == 0)
+	{
+		Fixed result(INT_MAX);
+		return result;
+	}
+	Fixed result;
+    result.setRawBits((this->getRawBits() << fractionalBits) / num.getRawBits());
+    
+	return result;
 }
 
 /** Increment operators**/
