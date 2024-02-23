@@ -47,9 +47,9 @@ int	Fixed::getRawBits(void) const
 	return this->fixedPointNumber;
 }
 
-void Fixed::setRawBits(int num)
+void Fixed::setRawBits(int const num)
 {
-	this->fixedPointNumber = num;//.getRawBits();
+	this->fixedPointNumber = num;
 }
 
 // It converts the fixed-point value to an integer value.
@@ -69,7 +69,7 @@ float	Fixed::toFloat(void) const
 // It inserts a floating-point representation of the fixed-point number into the output stream object
 std::ostream& operator<<(std::ostream& output, const Fixed& fixedPoint)
 {
-	output << fixedPoint.toFloat();
+	output << static_cast<int64_t>(fixedPoint.toFloat());
 	return output;
 }
 
@@ -124,7 +124,7 @@ Fixed Fixed::operator-(const Fixed &num)
 Fixed Fixed::operator*(const Fixed &num)
 {
 	Fixed	result;
-	result.setRawBits((this->getRawBits() * num.getRawBits()) >> fractionalBits);
+	result.setRawBits((static_cast<int64_t>(this->getRawBits()) * static_cast<int64_t>(num.getRawBits())) / (1 << fractionalBits));
 
 	return result;
 }
@@ -138,7 +138,7 @@ Fixed Fixed::operator/(const Fixed &num)
 		return result;
 	}
 	Fixed result;
-    result.setRawBits((this->getRawBits() << fractionalBits) / num.getRawBits());
+    result.setRawBits((static_cast<int64_t>(this->getRawBits()) * (1 << fractionalBits)) / static_cast<int64_t>(num.getRawBits()));
     
 	return result;
 }

@@ -82,6 +82,6 @@ float	Fixed::toFloat(void) const
 // It inserts a floating-point representation of the fixed-point number into the output stream object
 std::ostream& operator<<(std::ostream& output, const Fixed& fixedPoint)
 {
-	output << fixedPoint.toFloat();
+	output << static_cast<int64_t>(fixedPoint.toFloat());
 	return output;
 }
