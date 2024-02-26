@@ -19,9 +19,9 @@ Cat &Cat::operator=(const Cat &other)
 
 	if (this != &other)
 	{
+		this->type = other.type;
 		if (this->brain != nullptr)
 			delete this->brain;
-		this->type = other.type;
 		this->brain = new Brain(*other.brain);
 		if (this->brain == nullptr)
 			std::cerr << "Failed to allocate memory for cat's brain" << std::endl;
