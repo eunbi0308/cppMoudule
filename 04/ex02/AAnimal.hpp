@@ -17,15 +17,14 @@ class AAnimal
 {
 	protected:
 		std::string type;
-		Brain		*brain;
 	public:
 		AAnimal();
 		AAnimal(const AAnimal &other);
 		AAnimal &operator=(const AAnimal &other);
 		virtual ~AAnimal();
 
-		// pure virtual function
-		virtual void	makeSound() const = 0;
 		std::string		getType() const;
-		Brain			*getBrain();
+		// pure virtual functions
+		virtual Brain	&getBrain(void) const = 0;
+		virtual void	makeSound() const = 0;
 };

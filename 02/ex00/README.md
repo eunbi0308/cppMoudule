@@ -16,7 +16,7 @@ Orthodox Canonical Form
 
 - Destructor
 
-	- Shallow Copu
+	- Shallow Copy
 		The copied object's instance variable is referencing the memory of the original object's instance variable.
 	- Deep Copy
 		Copying the object and instance variables. 

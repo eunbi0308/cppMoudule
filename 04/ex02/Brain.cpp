@@ -2,12 +2,12 @@
 
 Brain::Brain()
 {
-	std::cout << "Brain Default constructor called." << std::endl;
+	std::cout << BLUE << "Brain Default constructor called." << DEFAULT << std::endl;
 }
 
 Brain::Brain(const Brain &other)
 {
-	std::cout << "Brain Copy constructor called." << std::endl;
+	std::cout << BLUE  << "Brain Copy constructor called." << DEFAULT << std::endl;
 	for (int i = 0; i < 100; ++i)
 	{
         this->ideas[i] = other.ideas[i];
@@ -16,7 +16,7 @@ Brain::Brain(const Brain &other)
 
 Brain &Brain::operator=(const Brain &other)
 {
-	std::cout << "Brain copy assignment operator called." << std::endl;
+	std::cout << BLUE  << "Brain copy assignment operator called." << DEFAULT << std::endl;
 	if (this != &other)
 	{
 		for (int i = 0; i < 100; ++i)
@@ -29,7 +29,7 @@ Brain &Brain::operator=(const Brain &other)
 
 Brain::~Brain()
 {
-	std::cout << "Brain Destructor called." << std::endl;
+	std::cout << BLUE  << "Brain Destructor called." << DEFAULT << std::endl;
 }
 
 size_t Brain::getIdeasArraySize() const
@@ -49,3 +49,4 @@ std::string	 Brain::getIdea(unsigned int index)
 {
 	return this->ideas[index];
 }
+

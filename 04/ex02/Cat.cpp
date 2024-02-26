@@ -4,6 +4,7 @@ Cat::Cat() : AAnimal()
 {
 	std::cout << PURPLE << "Cat Default constructor called." << DEFAULT << std::endl;
 	this->type = "Cat";
+	this->brain = new Brain();
 }
 
 Cat::Cat(const Cat &other) : AAnimal()
@@ -31,9 +32,16 @@ Cat &Cat::operator=(const Cat &other)
 Cat::~Cat()
 {
 	std::cout << PURPLE << "Cat Destructor called." << DEFAULT << std::endl;
+	if (this->brain != nullptr)
+		delete this->brain;
 }
 
 void	Cat::makeSound() const
 {
 	std::cout << PURPLE << this->type << " : Meow Meow" << DEFAULT << std::endl;
+}
+
+Brain	&Cat::getBrain() const
+{
+	return *this->brain;	
 }

@@ -6,7 +6,7 @@ Cat::Cat()
 	this->type = "Cat";
 }
 
-Cat::Cat(const Cat &) : AAnimal()
+Cat::Cat(const Cat &) : Animal()
 {
 	std::cout << PURPLE << "Cat Copy constructor called." << DEFAULT << std::endl;
 }

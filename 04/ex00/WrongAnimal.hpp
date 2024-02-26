@@ -12,16 +12,16 @@
 # define PURPLE	"\033[38;2;200;160;255m"
 
 
-class Animal
+class WrongAnimal
 {
 	protected:
 		std::string type;
 	public:
-		Animal();
-		Animal(const Animal &other);
-		Animal &operator=(const Animal &other);
-		virtual ~Animal();
+		WrongAnimal();
+		WrongAnimal(const WrongAnimal &);
+		WrongAnimal &operator=(const WrongAnimal &);
+		~WrongAnimal();
 
-		virtual void	makeSound() const;
+		void	makeSound() const;
 		std::string		getType() const;
 };

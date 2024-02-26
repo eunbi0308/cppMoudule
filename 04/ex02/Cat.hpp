@@ -5,6 +5,8 @@
 
 class Cat : public AAnimal
 {
+	private:
+		Brain	*brain;
 	public:
 		Cat();
 		Cat(const Cat &other);
@@ -12,4 +14,5 @@ class Cat : public AAnimal
 		~Cat();
 
 		void	makeSound() const;
+		Brain	&getBrain() const;
 };

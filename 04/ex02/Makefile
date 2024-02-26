@@ -2,16 +2,15 @@ NAME		=	Abstract
 CC			=	c++
 
 ifdef DEBUG
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11 -fsanitize=address -g
+CPPFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g
 else
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
+CPPFLAGS	=	-Wall -Wextra -Werror
 endif
 
 SRC_FILE	=	main.cpp AAnimal.cpp Cat.cpp Dog.cpp Brain.cpp
 
 OBJ_DIR		=	obj/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.cpp=.o))
-OBJF		=	.cache_exists
 
 HEADERS		=	AAnimal.hpp Cat.hpp Dog.hpp Brain.hpp
 
@@ -32,11 +31,9 @@ $(OBJ_DIR)%.o	: %.cpp $(HEADERS) | $(OBJF)
 
 $(OBJF)			:
 					@mkdir -p $(OBJ_DIR)
-					@touch $(OBJF)
 
 clean			:
 					@rm -rf $(OBJ_DIR)
-					@rm	-rf	$(OBJF)
 					@echo "$(CYAN)- Object files are cleaned - $(DEFAULT)"
 
 fclean			: clean

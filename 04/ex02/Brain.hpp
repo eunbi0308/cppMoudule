@@ -1,6 +1,9 @@
 #pragma once
 # include <iostream>
 
+# define BLUE "\033[38;5;38m"
+# define DEFAULT "\033[0m"
+
 class Brain
 {
 	private:
