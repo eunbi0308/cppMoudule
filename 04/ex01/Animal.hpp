@@ -2,6 +2,7 @@
 
 # include <iostream>
 # include <string>
+# include "Brain.hpp"
 
 # define GREEN "\033[0;92m"
 # define YELLOW "\e[38;5;208m"
@@ -24,5 +25,5 @@ class Animal
 
 		virtual void	makeSound() const;
 		std::string		getType() const;
-		// Brain			*getBrain();
+		virtual Brain	&getBrain() const = 0;
 };

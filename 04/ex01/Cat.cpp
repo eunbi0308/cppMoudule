@@ -41,7 +41,7 @@ void	Cat::makeSound() const
 	std::cout << PURPLE << this->type << " : Meow Meow" << DEFAULT << std::endl;
 }
 
-Brain	*Cat::getBrain()
+Brain	&Cat::getBrain() const
 {
-	return this->brain;	
+	return *this->brain;	
 }

@@ -41,7 +41,7 @@ void	Dog::makeSound() const
 	std::cout << GREEN << this->type << " : Woof" << DEFAULT << std::endl;
 }
 
-Brain	*Dog::getBrain()
+Brain	&Dog::getBrain() const
 {
-	return this->brain;	
+	return *this->brain;	
 }
