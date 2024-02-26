@@ -2,16 +2,15 @@ NAME		=	Brain
 CC			=	c++
 
 ifdef DEBUG
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11 -fsanitize=address -g
+CPPFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g
 else
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
+CPPFLAGS	=	-Wall -Wextra -Werror
 endif
 
 SRC_FILE	=	main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
 
 OBJ_DIR		=	obj/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.cpp=.o))
-OBJF		=	.cache_exists
 
 HEADERS		=	Animal.hpp Cat.hpp Dog.hpp Brain.hpp
 
@@ -22,21 +21,19 @@ DEFAULT		=	\033[0m
 
 all				:	$(NAME)
 
-$(NAME)			: $(OBJ) $(OBJF)
+$(NAME)			: $(OBJ)
 					@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
 					@echo	"$(CYAN_B) - Brain is compiled - $(DEFAULT)"
 
-$(OBJ_DIR)%.o	: %.cpp $(HEADERS) | $(OBJF)
+$(OBJ_DIR)%.o	: %.cpp $(HEADERS)
 					@mkdir -p $(@D)
 					@$(CC) $(CPPFLAGS) -c $< -o $@
 
 $(OBJF)			:
 					@mkdir -p $(OBJ_DIR)
-					@touch $(OBJF)
 
 clean			:
 					@rm -rf $(OBJ_DIR)
-					@rm	-rf	$(OBJF)
 					@echo "$(CYAN)- Object files are cleaned - $(DEFAULT)"
 
 fclean			: clean

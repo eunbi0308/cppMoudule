@@ -3,8 +3,10 @@
 # include "Animal.hpp"
 # include "Brain.hpp"
 
-class Dog : public AAnimal
+class Dog : public Animal
 {
+	private:
+		Brain	*brain;
 	public:
 		Dog();
 		Dog(const Dog &other);
@@ -12,4 +14,5 @@ class Dog : public AAnimal
 		~Dog();
 
 		void	makeSound() const;
+		Brain	*getBrain();
 };
