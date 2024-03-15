@@ -9,24 +9,57 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
+
+/**
+ * A custom class inherits all properties from the std::exception class.
+ * The what() function from std::exception is overridden, 
+ * which returns a custom error message string.
+*/
+
+class GradeTooHighException : public std::exception 
+{
+	private:
+		const char* message;
+
+	public:
+		GradeTooHighException(const char* msg) : message(msg) {}
+		const char* what() const noexcept override 
+		{
+			return message;
+		}
+};
+
+class GradeTooLowException : public std::exception 
+{
+	private:
+		const char* message;
+
+	public:
+		GradeTooLowException(const char* msg) : message(msg) {}
+		const char* what() const noexcept override 
+		{
+			return message;
+		}
+};
 
 class Bureaucrat
 {
 	private:
-	const std::string	name;
-	unsigned int		grade;
+		const std::string	name;
+		unsigned int		grade;
 
 	public:
-	Bureaucrat() {}
-	~Bureaucrat() {}
-	Bureaucrat(std::string name, unsigned int grade);
+		Bureaucrat(const Bureaucrat &other);
+		Bureaucrat &operator=(const Bureaucrat &other);
+		Bureaucrat(std::string name, unsigned int grade);
+		Bureaucrat() {}
+		~Bureaucrat() {}
 
-	std::string		getName() const;
-	unsigned int	getGrade() const;
-	void			incrementGrade();
-	void			decrementGrade();
-	void			GradeTooHighException();
-	void			GradeTooLowException();
+		std::string		getName() const;
+		unsigned int	getGrade() const;
+		void			incrementGrade();
+		void			decrementGrade();
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& name);
