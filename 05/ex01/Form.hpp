@@ -1,6 +1,8 @@
 #include "Bureaucrat.hpp"
 
-class Form : public Bureaucrat
+class Bureaurat;
+
+class Form
 {
 	private:
 		const std::string	name;
@@ -9,11 +11,11 @@ class Form : public Bureaucrat
 		const unsigned int	executeGrade;
 
 	public:
+		Form();
+		Form(std::string name, bool sign, unsigned int sGrade, unsigned int eGrade);
 		Form::Form(const Form &other);
 		Form &Form::operator=(const Form &other);
-		Form(std::string name, bool sign, unsigned int sGrade, unsigned int eGrade);
-		Form() :signGrade(1), executeGrade(1) {}
-		~Form() {}
+		~Form();
 		std::string		getName() const;
 		unsigned int	getSignGrade() const;
 		unsigned int	getExecuteGrade() const;
