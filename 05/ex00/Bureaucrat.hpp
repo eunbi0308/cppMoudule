@@ -20,11 +20,11 @@
 class GradeTooHighException : public std::exception 
 {
 	private:
-		const char* bureaucrat;
-		const char* message;
+		const std::string	bureaucrat;
+		const char*			message;
 
 	public:
-		GradeTooHighException(const char* name, const char* msg) : bureaucrat(name), message(msg) {}
+		GradeTooHighException(const std::string name, const char* msg) : bureaucrat(name), message(msg) {}
 		const char* what() const noexcept override 
 		{
 			std::cerr << "[" << bureaucrat << "] ";
@@ -35,11 +35,11 @@ class GradeTooHighException : public std::exception
 class GradeTooLowException : public std::exception 
 {
 	private:
-		const char* bureaucrat;
-		const char* message;
+		const std::string	bureaucrat;
+		const char*			message;
 
 	public:
-		GradeTooLowException(const char* name, const char* msg) : bureaucrat(name), message(msg) {}
+		GradeTooLowException(const std::string name, const char* msg) : bureaucrat(name), message(msg) {}
 		const char* what() const noexcept override 
 		{
 			std::cerr << "[" << bureaucrat << "] ";
@@ -51,13 +51,13 @@ class Bureaucrat
 {
 	private:
 		const std::string	name;
-		unsigned int		grade;
+		int		grade;
 
 	public:
 		Bureaucrat();
 		Bureaucrat(const Bureaucrat &other);
 		Bureaucrat &operator=(const Bureaucrat &other);
-		Bureaucrat(std::string name, unsigned int grade);
+		Bureaucrat(std::string name, int grade);
 		~Bureaucrat();
 
 		std::string		getName() const;

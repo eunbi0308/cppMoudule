@@ -20,7 +20,6 @@ int main()
 		std::cerr << YELLOW << "An exception occurred. " << e.what() << DEFAULT << std::endl;
 	}
 
-
 	try 
 	{
 		std::cout << std::endl;
@@ -69,6 +68,51 @@ int main()
 			std::cout << Andy << std::endl;
 		Jerry.decrementGrade();
 			std::cout << Jerry << std::endl;
+	}
+	catch(std::exception &e)
+	{
+		std::cerr << YELLOW << "An exception occurred. " << e.what() << DEFAULT << std::endl;
+	}
+
+	try 
+	{
+		std::cout << std::endl;
+		std::cout << RED << "Error Test" << DEFAULT << std::endl;
+
+		Bureaucrat Tom("Tom", 0);
+		Bureaucrat Andy("Andy", -10);
+		Bureaucrat Jerry("Jerry", 1800000);
+
+		std::cout << Tom << std::endl;
+		std::cout << Andy << std::endl;
+		std::cout << Jerry << std::endl;
+
+	}
+	catch(std::exception &e)
+	{
+		std::cerr << YELLOW << "An exception occurred. " << e.what() << DEFAULT << std::endl;
+	}
+
+	try 
+	{
+		std::cout << std::endl;
+		std::cout << RED << "Copy Test" << DEFAULT << std::endl;
+
+		Bureaucrat Tom;
+		// Bureaucrat Andy("Andy", 75);
+		Bureaucrat Jerry("Jerry", 1);
+
+		std::cout << Tom << std::endl;
+		std::cout << Jerry << std::endl;
+
+		std::cout << GREY << "COPY CONSTRUCTOR" << DEFAULT << std::endl;
+		Bureaucrat Andy(Jerry);
+		std::cout << Andy << std::endl;
+
+		std::cout << GREY << "COPY OPERATOR ASSIGNMENT" << DEFAULT << std::endl;
+		Andy = Tom;
+		std::cout << Andy << std::endl;
+
 	}
 	catch(std::exception &e)
 	{
