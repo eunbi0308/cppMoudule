@@ -3,6 +3,8 @@ CC			=	c++
 
 ifdef DEBUG
 CPPFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g
+else ifdef STRUCTOR
+CPPFLAGS	=	-Wall -Wextra -Werror -g -D DEBUG
 else
 CPPFLAGS	=	-Wall -Wextra -Werror
 endif
