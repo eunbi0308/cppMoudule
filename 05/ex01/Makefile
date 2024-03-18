@@ -23,7 +23,7 @@ all				:	$(NAME)
 
 $(NAME)			: $(OBJ) $(OBJF)
 					@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
-					@echo	"$(CYAN_B) - Abstract is compiled - $(DEFAULT)"
+					@echo	"$(CYAN_B) - Form is compiled - $(DEFAULT)"
 
 $(OBJ_DIR)%.o	: %.cpp $(HEADERS) | $(OBJF)
 					@mkdir -p $(@D)

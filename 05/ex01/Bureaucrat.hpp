@@ -17,35 +17,9 @@
  * which returns a custom error message string.
 */
 
-class GradeTooHighException : public std::exception 
-{
-	private:
-		const std::string	bureaucrat;
-		const char*			message;
+class Form;
 
-	public:
-		GradeTooHighException(const std::string name, const char* msg) : bureaucrat(name), message(msg) {}
-		const char* what() const noexcept override 
-		{
-			std::cerr << "[" << bureaucrat << "] ";
-			return message;
-		}
-};
 
-class GradeTooLowException : public std::exception 
-{
-	private:
-		const std::string	bureaucrat;
-		const char*			message;
-
-	public:
-		GradeTooLowException(const std::string name, const char* msg) : bureaucrat(name), message(msg) {}
-		const char* what() const noexcept override 
-		{
-			std::cerr << "[" << bureaucrat << "] ";
-			return message;
-		}
-};
 
 class Bureaucrat
 {
@@ -59,6 +33,24 @@ class Bureaucrat
 		Bureaucrat &operator=(const Bureaucrat &other);
 		Bureaucrat(std::string name, int grade);
 		~Bureaucrat();
+
+		class GradeTooHighException : public std::exception
+		{
+			private:
+				const std::string	bureaucrat;
+			public:
+				GradeTooHighException(const std::string name) : bureaucrat(name) {}
+				virtual const char *what() const noexcept override;
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			private:
+				const std::string	bureaucrat;
+			public:
+				GradeTooLowException(const std::string name) : bureaucrat(name) {}
+				virtual const char *what() const noexcept override;
+		};
 
 		std::string		getName() const;
 		unsigned int	getGrade() const;

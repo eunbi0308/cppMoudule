@@ -13,9 +13,9 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
 		std::cout << GREY << "Constructor called" << DEFAULT << std::endl; 
 	#endif
 	if (grade < 1)
-		throw GradeTooHighException(this->name.c_str(), "The grade is too high. The grade range is 1 - 150.");
+		throw GradeTooHighException(this->name.c_str());
 	else if (grade > 150)
-		throw GradeTooLowException(this->name.c_str(), "The grade is too low. The grade range is 1 - 150.");
+		throw GradeTooLowException(this->name.c_str());
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.getName()), grade(other.grade)
@@ -63,17 +63,30 @@ std::ostream& operator<<(std::ostream& out, const Bureaucrat& name)
 	return out;
 }
 
+/*** Exceptions ***/
+const char* Bureaucrat::GradeTooHighException::what() const noexcept
+{
+	std::cerr << "[" << bureaucrat << "] ";
+	return ("The grade is too high. The grade range is 1 - 150.");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const noexcept
+{
+	std::cerr << "[" << bureaucrat << "] ";
+	return ("The grade is too low. The grade range is 1 - 150.");
+}
+
 /*** Memeber functions ***/
 void	Bureaucrat::incrementGrade()
 {
 	if (grade == 1)
-		throw GradeTooHighException(this->getName().c_str(), "The grade is too high to increment. The highest grade is 1.");
+		throw GradeTooHighException(this->getName().c_str());
 	this->grade--;
 }
 
 void	Bureaucrat::decrementGrade()
 {
 	if (grade == 150)
-		throw GradeTooLowException(this->getName().c_str(), "The grade is too low to increment. The lowest grade is 150.");
+		throw GradeTooLowException(this->getName().c_str());
 	this->grade++;
 }
