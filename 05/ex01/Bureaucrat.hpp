@@ -40,7 +40,7 @@ class Bureaucrat
 				const std::string	bureaucrat;
 			public:
 				GradeTooHighException(const std::string name) : bureaucrat(name) {}
-				virtual const char *what() const noexcept override;
+				virtual const char *what() const throw();
 		};
 
 		class GradeTooLowException : public std::exception
@@ -49,7 +49,7 @@ class Bureaucrat
 				const std::string	bureaucrat;
 			public:
 				GradeTooLowException(const std::string name) : bureaucrat(name) {}
-				virtual const char *what() const noexcept override;
+				virtual const char *what() const throw();
 		};
 
 		std::string		getName() const;

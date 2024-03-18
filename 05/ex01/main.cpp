@@ -51,7 +51,12 @@ int main()
 		Tom.signForm(A);
 		std::cout << A << std::endl;
 
-		std::cout << GREY << "FAIL" << DEFAULT << std::endl;
+		std::cout << std::endl;
+		std::cout << GREY << "Sign on a signed form" << DEFAULT << std::endl;
+		Tom.signForm(A);
+
+		std::cout << std::endl;
+		std::cout << std::endl << GREY << "FAIL" << DEFAULT << std::endl;
 		Form		B("B", 1, 1);
 
 		std::cout << B << std::endl;
@@ -62,7 +67,6 @@ int main()
 	{
 		std::cerr << YELLOW << "An exception occurred. " << e.what() << DEFAULT << std::endl;
 	}
-
 
 	try 
 	{
@@ -82,10 +86,6 @@ int main()
 		Form	C("C", 1, 1);
 		C = A;
 		std::cout << C << std::endl;
-
-		std::cout << RED << "Modification Test" << DEFAULT << std::endl;
-
-
 	}
 	catch(std::exception &e)
 	{

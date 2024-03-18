@@ -14,9 +14,9 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
 		std::cout << GREY << "Constructor called" << DEFAULT << std::endl; 
 	#endif
 	if (grade < 1)
-		throw GradeTooHighException(this->name.c_str());
+		throw GradeTooHighException(this->name);
 	else if (grade > 150)
-		throw GradeTooLowException(this->name.c_str());
+		throw GradeTooLowException(this->name);
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.getName()), grade(other.grade)
@@ -69,42 +69,46 @@ unsigned int	Bureaucrat::getGrade() const
 void	Bureaucrat::incrementGrade()
 {
 	if (grade == 1)
-		throw GradeTooHighException(this->getName().c_str());
+		throw GradeTooHighException(this->getName());
 	this->grade--;
 }
 
 void	Bureaucrat::decrementGrade()
 {
 	if (grade == 150)
-		throw GradeTooLowException(this->getName().c_str());
+		throw GradeTooLowException(this->getName());
 	this->grade++;
+}
+
+/*** Exceptions ***/
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	std::cerr << "[" << bureaucrat << "]";
+	return ("'s grade is too high. The grade range is 1 - 150.");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	std::cerr << "[" << bureaucrat << "]";
+	return ("'s grade is too low. The grade range is 1 - 150.");
 }
 
 void	Bureaucrat::signForm(Form &form)
 {
 	try
 	{	
-		// if (form.getSignStatus() == true)
-
-		// else
+		if (form.getSignStatus() == true)
+			std::cerr << YELLOW << "Form [" << form.getName() << "] is already signed." << DEFAULT << std::endl;
+		else
+		{
 			form.beSigned(*this);
-		std::cout << PURPLE << "🖊️  " << getName() << " signed on Form " << form.getName() << "." << DEFAULT << std::endl;
+			std::cout << PURPLE << "🖊️  " << getName() << " signed on Form " << form.getName() << "." << DEFAULT << std::endl;
+		}
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << YELLOW << this->getName() << " couldn't sign " << form.getName() << ".\n" << e.what() << '\n' << DEFAULT;
+		std::cerr << YELLOW << this->getName() << " couldn't sign on form [" << form.getName() << "].\nBecause " << e.what() << '\n' << DEFAULT;
 	}
 	
-}
-
-const char* Bureaucrat::GradeTooHighException::what() const noexcept
-{
-	std::cerr << "[" << bureaucrat << "] ";
-	return ("The grade is too high. The grade range is 1 - 150.");
-}
-
-const char* Bureaucrat::GradeTooLowException::what() const noexcept
-{
-	std::cerr << "[" << bureaucrat << "] ";
-	return ("The grade is too low. The grade range is 1 - 150.");
 }

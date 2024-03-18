@@ -61,7 +61,7 @@ std::ostream& operator<<(std::ostream& out, const Bureaucrat& name);
  * There are two types of exceptions:
  * 
  * 1.Synchronous
- * 2. Asynchronous (Eg: disc failure)
+ * 2.Asynchronous (Eg: disc failure)
  * For this reason, C++ provides the following specialized keywords.
  * 
  * 	- try: denotes a block of code that has the potential to throw an exception.

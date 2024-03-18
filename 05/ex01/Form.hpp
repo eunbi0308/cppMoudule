@@ -21,7 +21,7 @@ class Form
 				const std::string	bureaucrat;
 			public:
 				GradeTooHighException(const std::string name) : bureaucrat(name) {}
-				virtual const char *what() const noexcept override;
+				const char *what() const throw();
 		};
 
 		class GradeTooLowException : public std::exception
@@ -30,14 +30,14 @@ class Form
 				const std::string	bureaucrat;
 			public:
 				GradeTooLowException(const std::string name) : bureaucrat(name) {}
-				virtual const char *what() const noexcept override;;
+				const char *what() const throw();;
 		};
 
 		std::string		getName() const;
 		int				getSignStatus() const;
 		unsigned int	getSignGrade() const;
 		unsigned int	getExecuteGrade() const;
-		void			beSigned(Bureaucrat name);
+		void			beSigned(Bureaucrat &name);
 };
 
 std::ostream& operator<<(std::ostream& out, const Form& name);

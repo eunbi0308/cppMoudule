@@ -15,9 +15,9 @@ Form::Form(std::string name, int sGrade, int eGrade)
 	#endif
 	// Min & Max grade check
 	if (signGrade < 1 || executeGrade < 1)
-		throw GradeTooHighException(this->name.c_str());
+		throw GradeTooHighException(this->name);
 	else if (signGrade > 150 || executeGrade > 150)
-		throw GradeTooLowException(this->name.c_str());
+		throw GradeTooLowException(this->name);
 }
 
 Form::Form(const Form &other)
@@ -85,22 +85,23 @@ unsigned int	Form::getExecuteGrade() const
 	return this->executeGrade;
 }
 
-void			Form::beSigned(Bureaucrat bureaucrat)
+void			Form::beSigned(Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > this->getSignGrade())
-		throw GradeTooLowException(bureaucrat.getName().c_str());
+		throw GradeTooLowException(bureaucrat.getName());
 	else
 		this->sign = true;
+	
 }
 
-const char* Form::GradeTooHighException::what() const noexcept
+const char* Form::GradeTooHighException::what() const throw()
 {
-	std::cerr << "[" << bureaucrat << "] ";
-	return ("The grade is too high. The grade range is 1 - 150.");
+	std::cerr << "[" << bureaucrat << "]";
+	return ("'s grade is too high. The grade range is 1 - 150.");
 }
 
-const char* Form::GradeTooLowException::what() const noexcept
+const char* Form::GradeTooLowException::what() const throw()
 {
-	std::cerr << "[" << bureaucrat << "] ";
-	return ("The grade is too low. The grade range is 1 - 150.");
+	std::cerr << "[" << bureaucrat << "]";
+	return ("'s grade is too low. The grade range is 1 - 150.");
 }
