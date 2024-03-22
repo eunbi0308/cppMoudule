@@ -17,6 +17,12 @@ class AForm
 		AForm(std::string name, int sGrade, int eGrade);
 		AForm(const AForm &other);
 		AForm &operator=(const AForm &other);
+		// because C++ does not automatically call derived class destructors
+		// when you delete a base class pointer that points to a derived class object.
+		// If the destructor in the base class is not virtual, then only the base class 
+		// destructor will be called, leading to incomplete destruction of the object.
+		// This can result in undefined behavior, especially if the derived class has resources 
+		//  that need to be cleaned up.
 		virtual ~AForm();
 
 		class GradeTooHighException : public std::exception

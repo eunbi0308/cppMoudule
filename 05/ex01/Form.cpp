@@ -21,7 +21,7 @@ Form::Form(std::string name, int sGrade, int eGrade)
 }
 
 Form::Form(const Form &other)
-: name(other.getName()), sign(false), signGrade(other.getSignGrade()), executeGrade(other.getExecuteGrade())
+: sign(false), signGrade(other.getSignGrade()), executeGrade(other.getExecuteGrade())
 {
 	#ifdef DEBUG
 		std::cout << GREY << "Form : Copy constructor called" << DEFAULT << std::endl; 
@@ -37,8 +37,8 @@ Form &Form::operator=(const Form &other)
 	#endif
 	if (this != &other)
 	{
-		this->sign = other.sign;
 		const_cast<std::string &>(this->name) = other.name;
+		this->sign = other.sign;
 		const_cast<int&>(this->signGrade) = other.signGrade;
 		const_cast<int&>(this->executeGrade) = other.executeGrade;
 	}
@@ -97,11 +97,11 @@ void			Form::beSigned(Bureaucrat &bureaucrat)
 const char* Form::GradeTooHighException::what() const throw()
 {
 	std::cerr << "[" << bureaucrat << "]";
-	return ("'s grade is too high. The grade range is 1 - 150.");
+	return ("'s grade is too high.");
 }
 
 const char* Form::GradeTooLowException::what() const throw()
 {
 	std::cerr << "[" << bureaucrat << "]";
-	return ("'s grade is too low. The grade range is 1 - 150.");
+	return ("'s grade is too low.");
 }

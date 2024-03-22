@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp" 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : name("DEFAULT"), grade(150)
 {
@@ -19,7 +19,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
 		throw GradeTooLowException(this->name);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other)
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.getName()), grade(other.grade)
 {
 	#ifdef DEBUG
 		std::cout << GREY << "Copy constructor called" << DEFAULT << std::endl; 
@@ -95,7 +95,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 	return ("'s grade is too low. The grade range is 1 - 150.");
 }
 
-void	Bureaucrat::signForm(Form &form)
+void	Bureaucrat::signForm(AForm &form)
 {
 	try
 	{	
@@ -104,13 +104,26 @@ void	Bureaucrat::signForm(Form &form)
 		else
 		{
 			form.beSigned(*this);
-			std::cout << PURPLE << "🖊️  " << getName() << " signed on Form " << form.getName() << "." << DEFAULT << std::endl;
+			std::cout << PURPLE << "🖊️  " << this->getName() << " signed on Form " << form.getName() << "." << DEFAULT << std::endl;
 		}
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << YELLOW << this->getName() << " couldn't sign on form [" << form.getName() << "].\nBecause " << e.what() << '\n' << DEFAULT;
-		throw e;
 	}
 	
+}
+
+void Bureaucrat::executeForm(const AForm& form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << PURPLE << "👌 " << this->getName() << " executed " << form.getName() << "." << DEFAULT << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << YELLOW << this->getName() << " couldn't execute [" << form.getName() << "].\nBecause " << e.what() << '\n' << DEFAULT;
+		// throw e;
+	}	
 }
