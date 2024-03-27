@@ -86,7 +86,6 @@ int main()
 		std::cout << Tom << std::endl;
 		std::cout << Andy << std::endl;
 		std::cout << Jerry << std::endl;
-
 	}
 	catch(std::exception &e)
 	{

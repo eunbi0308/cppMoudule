@@ -1,27 +1,20 @@
-NAME		=	AForm
+NAME		=	convert
 CC			=	c++
 
 ifdef DEBUG
 CPPFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g
+else ifdef STRUCTOR
+CPPFLAGS	=	-Wall -Wextra -Werror -g -D DEBUG
 else
 CPPFLAGS	=	-Wall -Wextra -Werror
 endif
 
-SRC_FILE	=	main.cpp \
-				Bureaucrat.cpp \
-				AForm.cpp \
-				ShrubberyCreationForm.cpp \
-				RobotomyRequestForm.cpp \
-				PresidentialPardonForm.cpp \
+SRC_FILE	=	Scalar.cpp main.cpp
 
 OBJ_DIR		=	obj/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.cpp=.o))
 
-HEADERS		=	Bureaucrat.hpp \
-				AForm.hpp \
-				ShrubberyCreationForm.hpp \
-				RobotomyRequestForm.hpp \
-				PresidentialPardonForm.hpp \
+HEADERS		=	Scalar.hpp
 
 CYAN_B		=	\033[1;96m
 CYAN		=	\033[0;96m
@@ -32,7 +25,7 @@ all				:	$(NAME)
 
 $(NAME)			: $(OBJ) $(OBJF)
 					@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
-					@echo	"$(CYAN_B) - AForm is compiled - $(DEFAULT)"
+					@echo	"$(CYAN_B) - Scalarconvert is compiled - $(DEFAULT)"
 
 $(OBJ_DIR)%.o	: %.cpp $(HEADERS) | $(OBJF)
 					@mkdir -p $(@D)
@@ -48,7 +41,6 @@ clean			:
 fclean			: clean
 					@rm -f $(NAME)
 					@echo "$(CYAN)- Executable files are cleaned - $(DEFAULT)"
-					@rm -f *_shrubbery
 
 re				:	fclean all
 

@@ -15,5 +15,5 @@ class RobotomyRequestForm : public AForm
 		~RobotomyRequestForm();
 
 		std::string	getTarget() const override {return target;}
-		void		execute(Bureaucrat const& bureaucrat) const;
+		void		execute(Bureaucrat const& bureaucrat) const override;
 };

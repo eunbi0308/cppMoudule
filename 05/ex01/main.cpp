@@ -24,11 +24,10 @@ int main()
 		std::cout << RED << "Limition Test" << DEFAULT << std::endl;
 
 		Form	B("B", 50, 100);
-		Form	C("C", -1800000, 50);
-
 		std::cout << B << std::endl;
+		
+		Form	C("C", -1800000, 50);
 		std::cout << C << std::endl;
-
 	}
 	catch(std::exception &e)
 	{
@@ -44,7 +43,7 @@ int main()
 
 		std::cout << Tom << std::endl;
 
-		std::cout << GREY << "SUCCESS" << DEFAULT << std::endl;
+		std::cout << GREY << "*** SUCCESS" << DEFAULT << std::endl;
 		Form		A("A", 100, 1);
 
 		std::cout << A << std::endl;
@@ -52,11 +51,11 @@ int main()
 		std::cout << A << std::endl;
 
 		std::cout << std::endl;
-		std::cout << GREY << "Sign on a signed form" << DEFAULT << std::endl;
+		std::cout << GREY << "*** Sign on a signed form" << DEFAULT << std::endl;
 		Tom.signForm(A);
 
 		std::cout << std::endl;
-		std::cout << std::endl << GREY << "FAIL" << DEFAULT << std::endl;
+		std::cout << std::endl << GREY << "*** FAIL" << DEFAULT << std::endl;
 		Form		B("B", 1, 1);
 
 		std::cout << B << std::endl;
