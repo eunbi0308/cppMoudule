@@ -51,6 +51,7 @@ clean			:
 fclean			: clean
 					@rm -f $(NAME)
 					@echo "$(CYAN)- Executable files are cleaned - $(DEFAULT)"
+					@rm -f *_shrubbery
 
 re				:	fclean all
 

@@ -43,6 +43,7 @@ AForm*	Intern::makeForm(std::string str, std::string target)
 	{
 		if (forms[i] == str)
 		{
+			std::cout << PINK << "Intern creates " << str << " form." << DEFAULT << std::endl;
 			switch (i)
 			{
 				case 0:

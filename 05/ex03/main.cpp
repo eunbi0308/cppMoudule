@@ -66,6 +66,7 @@ int main()
 		tom.executeForm(*pardonForm);
 		std::cout << "\n";
 
+
 		delete shrubberyForm;
 		delete robotomyForm;
 		delete pardonForm;
@@ -78,7 +79,7 @@ int main()
 	try
 	{
 		std::cout << std::endl;
-		std::cout << RED << "Intern Test - FAIL" << DEFAULT << std::endl;
+		std::cout << RED << "Intern Test - FAILURE" << DEFAULT << std::endl;
 
 		Intern	intern;
 
@@ -113,11 +114,6 @@ int main()
 	
 		delete shrubbery;
 		shrubbery = nullptr;
-		// if (robotomy != shrubbery)
-		// {	
-		// 	delete robotomy;
-		// 	robotomy = nullptr;
-		// }
 	}
 	catch(std::exception &e)
 	{
