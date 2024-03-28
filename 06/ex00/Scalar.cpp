@@ -1,6 +1,7 @@
 #include "Scalar.hpp"
 #include <sstream>
 #include <cstdlib>
+#include <limits>
 
 ScalarConverter::ScalarConverter()
 {
@@ -45,71 +46,105 @@ ScalarConverter::~ScalarConverter()
 
 void	printConvertedValues(const char c, const int i, const float f, const double d)
 {
+	/*** CHAR ***/
 	std::cout << "char: ";
-	if (c < 31 || c > 127)
+	if (c < 0 || c > 127 || c == '\0')
+		std::cout << "impossible" << std::endl;
+	else if (c >= 0 && c <= 31)
 		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << c << std::endl;
-	std::cout << "int: " << i << std::endl;
-	std::cout << "float: " << f << std::endl;
+		std::cout << "'" << c << "'" << std::endl;
+
+	/*** INT ***/
+	std::cout << "int: ";
+	if (i > std::numeric_limits<int>::max() || i < std::numeric_limits<int>::min())
+		std::cout << "impossible" << std::endl;
+	else
+		std::cout << i << std::endl;
+	
+	/*** FLOAT ***/
+	std::cout << "float: " << f << "f"<< std::endl;
+
+	/*** DOUBLE ***/
+	std::cout << "double: " << d << std::endl;
+}
+
+void	PrintSpecialValues(const std::string input, float f, double d)
+{
+	if (input == "nan" || input == "nanf")
+	{
+		f = std::numeric_limits<float>::quiet_NaN();
+		d = std::numeric_limits<double>::quiet_NaN();
+	}
+	else
+	{
+		if (input[0] == '-')
+		{
+			f = __FLT_MAX__ * -10;
+			d = __DBL_MAX__ * -10;
+		}
+		else
+		{
+			f = __FLT_MAX__ * 10;
+			d = __DBL_MAX__ * 10;
+		}
+	}
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: " << f << "f"<< std::endl;
 	std::cout << "double: " << d << std::endl;
 }
 
 void	ScalarConverter::convert(const std::string input)
 {
 	char	c = 0;
-	int		i = 0;
+	long long		i = 0;
 	float	f = 0.0f;
 	double	d = 0.0;
 
-	std::string::size_type n;
+	std::string::size_type decimalpoint;
 	std::string::size_type fPosition;
 
-	n = input.find('.');
+	decimalpoint = input.find('.');
 	fPosition = input.find('f', input.length() - 1); //finding 'f' at the end of string.
+
+	// std::cout << RED << input << DEFAULT << std::endl;
 
 	//Pseudo literals
 	if (input == "nan" || input == "inf" || input == "+inf" || input == "-inf"
 		|| input == "nanf" || input == "inff" || input == "+inff" || input == "-inff")
 	{
-		if (input == "nan" || input == "nanf")
-			d = sqrt(-1.0);
-		else
-		{
-			if (input[0] == '-')
-				d = __DBL_MAX__ * -1000;
-			else
-				d = __DBL_MAX__ * 1000;
-		}
+		PrintSpecialValues(input,f, d);
+		return ;
 	}
-	else if (input.length() == 1 && !std::isdigit(static_cast<char>(input[0])))
+	else if (input.length() == 1 && !std::isdigit(input[0]))
 	{
+		std::cout << RED << "HERE 1" << DEFAULT << std::endl;
 		//single character
 		c = static_cast<char>(input[0]);
 		i = static_cast<int>(c);
 		f = static_cast<float>(c);
 		d = static_cast<double>(c);
+
+		// std::cout << c << "||" << i << "||" << f << "||" << d << std::endl;
 	}
-	else if (n == std::string::npos) // maximum possible value of size_type
+	else if (decimalpoint == std::string::npos) //no decimal point
 	{
+		std::cout << RED << "HERE 2" << DEFAULT << std::endl;
 		i = stoi(input);
 
 		std::stringstream ss;
 		ss << i;
-		// std::cout << "len : " << input.length() << "size : " << input.size() << std::endl;
-		if (ss.str() != input)
+		if (i > 0)
 		{
-			if (i > 0 && fPosition == input.length() - 1)
-			{
-				c = static_cast<char>(i);
-				f = static_cast<float>(i);
-				d = static_cast<double>(i);
-			}
-
+			c = static_cast<char>(i);
+			f = static_cast<float>(i);
+			d = static_cast<double>(i);
 		}
 	}
 	else
 	{
+		std::cout << RED << "HERE 3" << DEFAULT << std::endl;
 		const char* str = input.c_str();
 		char*	endptr = NULL;
 
@@ -124,8 +159,6 @@ void	ScalarConverter::convert(const std::string input)
 			c = static_cast<char>(d); 
 			i = static_cast<int>(d);
 			f = static_cast<float>(d);
-
-			std::cout << c << "||" << i << "||" << f << "||" << d << std::endl;
 		}
 	}
 	printConvertedValues(c, i, f, d);
