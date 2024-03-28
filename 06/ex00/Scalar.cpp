@@ -98,7 +98,7 @@ void	PrintSpecialValues(const std::string input, float f, double d)
 void	ScalarConverter::convert(const std::string input)
 {
 	char	c = 0;
-	long long		i = 0;
+	int		i = 0;
 	float	f = 0.0f;
 	double	d = 0.0;
 
@@ -145,11 +145,17 @@ void	ScalarConverter::convert(const std::string input)
 	else
 	{
 		std::cout << RED << "HERE 3" << DEFAULT << std::endl;
-		const char* str = input.c_str();
+		// const char* str = input.c_str();
 		char*	endptr = NULL;
 
-		d = strtod(str, &endptr);
-		if ((*endptr && !(*endptr == 'f' && endptr == &str[input.length() - 1])))
+		if (!input.empty() && input.back() == '.')
+		{
+			std::string tmp = input + '0';
+   		}
+		d = std::strtod(tmp.c_str(), &endptr);
+		// std::cout << "Value of double: ";
+		// std::cout << d << std::endl;
+		if ((*endptr && !(*endptr == 'f' && endptr == &tmp[tmp.length() - 1])))
 		{
 			std::cout << "error" << std::endl;
 			return ;
