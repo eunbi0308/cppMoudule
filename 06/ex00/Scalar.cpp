@@ -118,13 +118,13 @@ void	PrintSpecialValues(const std::string input, float f, double d)
 	{
 		if (input[0] == '-')
 		{
-			f = __FLT_MAX__ * -10;
-			d = __DBL_MAX__ * -10;
+			f = -std::numeric_limits<float>::infinity();
+			d = -std::numeric_limits<double>::infinity();
 		}
 		else
 		{
-			f = __FLT_MAX__ * 10;
-			d = __DBL_MAX__ * 10;
+			f = std::numeric_limits<float>::infinity();
+			d = std::numeric_limits<double>::infinity();
 		}
 	}
 	std::cout << "char: impossible" << std::endl;
@@ -155,7 +155,7 @@ void	ScalarConverter::convert(const std::string input)
 		std::cerr << RED << "error" << DEFAULT << std::endl;
 		return ;
 	}
-	else if (input.length() == 1 && !std::isdigit(input[0]))
+	if (input.length() == 1 && !std::isdigit(input[0]))
 	{
 		//single character
 		c = static_cast<char>(input[0]);
@@ -163,15 +163,17 @@ void	ScalarConverter::convert(const std::string input)
 		f = static_cast<float>(c);
 		d = static_cast<double>(c);
 	}
-	else if (decimalpoint == std::string::npos) //no decimal point
+	else if (decimalpoint == std::string::npos)
 	{
+		//no decimal point
 		i = stoi(input);
 		c = static_cast<char>(i);
         f = static_cast<float>(i);
 		d = static_cast<double>(i);
 	}
-	else // convert double input
+	else 
 	{
+		// double and float
 		const char* str = input.c_str();
 		char*		endptr = NULL;
 
@@ -181,12 +183,9 @@ void	ScalarConverter::convert(const std::string input)
 			std::cerr << RED << "error" << DEFAULT << std::endl;
 			return ;
 		}
-		else
-		{
-			c = static_cast<char>(d);
-			i = static_cast<int>(d);
-			f = static_cast<float>(d);
-		}
+		c = static_cast<char>(d);
+		i = static_cast<int>(d);
+		f = static_cast<float>(d);
 	}
 	printConvertedValues(c, i, f, d);
 }
