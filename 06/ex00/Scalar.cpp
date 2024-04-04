@@ -48,8 +48,7 @@ bool	inputChecker(const std::string input)
 	if ((input.length() > 1 && std::isdigit(input[0])) || (input.length() > 1 && input[0] == '-'))
 	{
 		long long int number = std::stoll(input);
-		if (number > std::numeric_limits<int>::max()
-			|| number < std::numeric_limits<int>::min())
+		if (number > std::numeric_limits<int>::max() || number < std::numeric_limits<int>::min())
 			return (false);
 	}
 	return (true);
