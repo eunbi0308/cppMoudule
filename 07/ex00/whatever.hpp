@@ -1,23 +1,23 @@
 #pragma once
 
-template<typename T>
+template <typename T>
 void swap(T& a, T& b) 
 {
-    T temp = a;
+    T tmp = a;
     a = b;
-    b = temp;
+    b = tmp;
 }
 
 // min function template
-template<typename T>
+template <typename T>
 T min(const T& a, const T& b)
 {
-    return (b < a) ? b : a;
+    return (a < b) ? a : b;
 }
 
 // max function template
-template<typename T>
+template <typename T>
 T max(const T& a, const T& b)
 {
-    return (a < b) ? b : a;
+    return (a > b) ? a : b;
 }
