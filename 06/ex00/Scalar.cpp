@@ -40,15 +40,18 @@ ScalarConverter::~ScalarConverter()
 bool	inputChecker(const std::string input)
 {
 	// Non digit input
-	if (input[0] != '-' && input.length() >= 1 && !std::isdigit(input[0]))
+	if (input[0] != '-' && input.length() > 1 && !std::isdigit(input[0]))
 		return (false);
 	// Out of range
 	if (input.length() >= std::to_string(std::numeric_limits<long long int>::max()).length())
 		return false;
-	long long int number = std::stoll(input);
-	if (number > std::numeric_limits<int>::max()
-		|| number < std::numeric_limits<int>::min())
-		return (false);
+	if ((input.length() > 1 && std::isdigit(input[0])) || (input.length() > 1 && input[0] == '-'))
+	{
+		long long int number = std::stoll(input);
+		if (number > std::numeric_limits<int>::max()
+			|| number < std::numeric_limits<int>::min())
+			return (false);
+	}
 	return (true);
 }
 
@@ -86,7 +89,9 @@ void	printConvertedValues(const char c, const int i, const float f, const double
 	/*** FLOAT ***/
 	std::stringstream ss;
 	std::cout << "float: ";
-	if (areDecimalsZero(f) || f == 0)
+	if (static_cast<int>(static_cast<float>(i)) != i)
+		std::cerr << "impossible" << std::endl;
+	else if (areDecimalsZero(f) || f == 0)
 	{
 		ss << std::fixed << std::setprecision(1) << f;
 		std::cout << ss.str() << "f" << std::endl;
@@ -185,7 +190,7 @@ void	ScalarConverter::convert(const std::string input)
 		}
 		c = static_cast<char>(d);
 		i = static_cast<int>(d);
-		f = static_cast<float>(d);
+        f = static_cast<float>(d);
 	}
 	printConvertedValues(c, i, f, d);
 }
