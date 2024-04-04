@@ -74,6 +74,27 @@ echo ""
 read -p "Press enter to continue"
 
 ###########################################
+echo -e "${GREEN}- SINGLE CHARACTER -${NC}"
+
+echo -e "${PURPLE}input: *${NC}"
+./convert '*'
+echo ""
+
+read -p "Press enter to continue"
+
+echo -e "${PURPLE}input: a${NC}"
+./convert a
+echo ""
+
+read -p "Press enter to continue"
+
+echo -e "${PURPLE}input: -${NC}"
+./convert '-'
+echo ""
+
+read -p "Press enter to continue"
+
+###########################################
 echo -e "${GREEN}- MAX/MIN INTEGER -${NC}"
 
 echo -e "${PURPLE}input: 2147483647${NC}"
