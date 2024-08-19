@@ -4,7 +4,7 @@ CC			=	c++
 ifdef DEBUG
 CPPFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g
 else ifdef STRUCTOR
-CPPFLAGS	=	-Wall -Wextra -Werror -g -D DEBUG
+CPPFLAGS	=	-Wall -Wextra -Werror -g -D STRUCTOR
 else
 CPPFLAGS	=	-Wall -Wextra -Werror
 endif
@@ -14,7 +14,7 @@ SRC_FILE	=	main.cpp
 OBJ_DIR		=	obj/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.cpp=.o))
 
-HEADERS		=	Array.hpp
+HEADERS		=	Array.hpp Array.tpp
 
 CYAN_B		=	\033[1;96m
 CYAN		=	\033[0;96m
