@@ -3,7 +3,7 @@
 int main()
 {
 	{
-		std::cout << BLUE << "\n_____ Basic test _____\n\n" << DEFAULT;
+		std::cout << BLUE << "\n_____ Basic test\n\n" << DEFAULT;
 		try
 		{
 			std::vector<int> vectorInt = {0, 3, 6, 9, 12, 15};
@@ -34,7 +34,7 @@ int main()
 		}
 	}
 	{
-		std::cout << BLUE << "\n_____ First occurrence test _____\n\n" << DEFAULT;
+		std::cout << BLUE << "\n_____ First occurrence test \n\n" << DEFAULT;
 		try
 		{
 			std::vector<int> vectorInt = {0, 3, 6, 9, 9, 15};
