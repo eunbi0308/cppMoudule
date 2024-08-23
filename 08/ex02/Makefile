@@ -1,4 +1,4 @@
-NAME		=	Array
+NAME		=	MutantStack
 CC			=	c++
 
 ifdef DEBUG
@@ -14,7 +14,7 @@ SRC_FILE	=	main.cpp
 OBJ_DIR		=	obj/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.cpp=.o))
 
-HEADERS		=	Array.hpp Array.tpp
+HEADERS		=	MutantStack.hpp MutantStack.tpp
 
 CYAN_B		=	\033[1;96m
 CYAN		=	\033[0;96m
@@ -25,7 +25,7 @@ all				:	$(NAME)
 
 $(NAME)			: $(OBJ) $(OBJF)
 					@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
-					@echo	"$(CYAN_B) - Array is compiled - $(DEFAULT)"
+					@echo	"$(CYAN_B) - MutantStack is compiled - $(DEFAULT)"
 
 $(OBJ_DIR)%.o	: %.cpp $(HEADERS) | $(OBJF)
 					@mkdir -p $(@D)

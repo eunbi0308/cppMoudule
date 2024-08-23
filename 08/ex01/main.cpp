@@ -6,7 +6,7 @@ std::vector<int> generateUniqueRandomNumbers(unsigned int count, int min, int ma
 int main()
 {
     {
-		std::cout << BLUE << "\n_____ Default test\n\n" << DEFAULT;
+		std::cout << GREEN << "\n_____ Default test\n\n" << DEFAULT;
 		try
 		{
 			std::cout << PURPLE << "Subject test\n" << DEFAULT;
@@ -26,7 +26,7 @@ int main()
         }
     }
     {
-		std::cout << BLUE << "\n_____ Basic test\n\n" << DEFAULT;
+		std::cout << GREEN << "\n_____ Basic test\n\n" << DEFAULT;
 		try
 		{
 			std::cout << PURPLE << "Default contructor\n" << DEFAULT;
@@ -98,7 +98,7 @@ int main()
         }
     }
     {
-		std::cout << BLUE << "\n_____ Error test\n\n" << DEFAULT;
+		std::cout << GREEN << "\n_____ Error test\n\n" << DEFAULT;
 		try
 		{
 			std::cout << PURPLE << "No number\n" << DEFAULT;
@@ -185,7 +185,7 @@ int main()
         }
     }
     {
-        std::cout << BLUE << "\n_____ Large numbers test\n\n" << DEFAULT;
+        std::cout << GREEN << "\n_____ Large numbers test\n\n" << DEFAULT;
         try
 		{
             std::cout << "\n";

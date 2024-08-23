@@ -58,6 +58,7 @@
 		"bitset": "cpp",
 		"map": "cpp",
 		"regex": "cpp",
-		"*.tpp": "cpp"
+		"*.tpp": "cpp",
+		"list": "cpp"
 	}
 }
