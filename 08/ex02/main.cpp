@@ -185,6 +185,60 @@ int main()
 			++it;
 		}
 	}
+	{
+		std::cout << GREEN << "___ Change value of stack elements by using iterator" << "\n" << DEFAULT;
+		
+		MutantStack<int> mstack;
 
+		mstack.push(1);
+		mstack.push(2);
+		mstack.push(3);
+		mstack.push(4);
+		mstack.push(5);
+
+		MutantStack<int>::iterator it = mstack.begin();
+		MutantStack<int>::iterator ite = mstack.end();
+
+		std::cout << PINK << "Adding 10 to each numbers..." << "\n" << DEFAULT;
+		while (it != ite)
+		{
+			*it += 10;
+			std::cout << *it << std::endl;
+			++it;
+		}
+
+		std::cout << PINK << "Changing all numbers into 88..." << "\n" << DEFAULT;
+		it = mstack.begin();
+		ite = mstack.end();
+		while (it != ite)
+		{
+			*it = 88;
+			std::cout << *it << std::endl;
+			++it;
+		}
+	}
+	{
+		std::cout << GREEN << "___ Constant interator" << "\n" << DEFAULT;
+		
+		MutantStack<int> mstack;
+
+		mstack.push(1);
+		mstack.push(2);
+		mstack.push(3);
+		mstack.push(4);
+		mstack.push(5);
+
+		MutantStack<int>::const_iterator it = mstack.begin();
+		MutantStack<int>::const_iterator ite = mstack.end();
+
+		std::cout  << "< elements >" << "\n" << DEFAULT;
+		while (it != ite)
+		{
+			std::cout << *it << std::endl;
+			++it;
+		}
+		std::cout << PINK << "Attempt to modify a value" << "\n" << DEFAULT;
+		// *it = 88;	
+	}
 	return 0;
 }
