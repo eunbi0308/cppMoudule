@@ -45,16 +45,12 @@ void Bitcoin::setBcData(std::unordered_map<std::string, double> data)
 bool    checkDateValidation(const std::string &date)
 {
     std::istringstream ss(date);
-    int year, month, day;
+    std::tm ymd;
 
-    if (ss >> year && ss.get() == '-' && ss >> month && ss.get() == '-' && ss >> day) 
-    {
-        std::chrono::year_month_day ymd{std::chrono::year(year), std::chrono::month(month), std::chrono::day(day)};
-
-        if (ymd.ok())
-            return true;
-    }
-    return false;
+    ss >> std::get_time(&ymd, "%Y-%m-%d");
+    if (ss.fail())
+        return false;
+    return true;
 }
 
 void Bitcoin::calcualteAndPrint(std::string filename)

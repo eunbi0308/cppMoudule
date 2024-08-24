@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 #include <chrono>
 
 class Bitcoin
