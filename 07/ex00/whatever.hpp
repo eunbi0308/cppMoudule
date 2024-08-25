@@ -7,7 +7,7 @@
  * Templates are expanded at compiler time(like macros).
  * the compiler does type-checking before template expansion.
  * Source code contains only function/class, but compiled code may conatain
- * multiple copies of the same fucntion/clasee.
+ * multiple copies of the same fucntion/class.
  */
 template <typename T>
 void swap(T& a, T& b) 

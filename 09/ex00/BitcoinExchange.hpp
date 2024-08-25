@@ -10,16 +10,20 @@
 # define DEFAULT "\033[0m"
 
 #include <iostream>
-#include <unordered_map>
+#include <map>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
 #include <chrono>
+#include <regex>
+#include <string>
+#include <iterator>
+#include <vector>
 
 class Bitcoin
 {
     private:
-        std::unordered_map<std::string, double> bcData;
+        std::map<int, double> bcData;
 
     public:
         Bitcoin();
@@ -27,7 +31,11 @@ class Bitcoin
         Bitcoin& operator=(const Bitcoin& other);
         ~Bitcoin();
     
-        std::unordered_map<std::string, double> getBcData();
-        void setBcData(std::unordered_map<std::string, double> data);
-        void calcualteAndPrint(std::string filename);
+        std::map<int, double> getBcData();
+        void    setBcData(std::map<int, double> data);
+        void    calcualteAndPrint(std::string filename);
+        float   exchange(int date, float value);
+        // int     convertDate(const std::string& date);
 };
+
+int	convertDate(const std::string& date);

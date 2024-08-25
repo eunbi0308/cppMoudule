@@ -59,6 +59,10 @@
 		"map": "cpp",
 		"regex": "cpp",
 		"*.tpp": "cpp",
-		"list": "cpp"
+		"list": "cpp",
+		"charconv": "cpp",
+		"complex": "cpp",
+		"format": "cpp",
+		"variant": "cpp"
 	}
 }
