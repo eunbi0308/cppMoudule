@@ -1,4 +1,4 @@
-NAME		=	whatever
+NAME		=	Whatever
 CC			=	c++
 
 ifdef DEBUG

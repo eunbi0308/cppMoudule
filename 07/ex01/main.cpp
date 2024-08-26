@@ -58,4 +58,17 @@ int main()
 		iter(arr, len, addOne<double>);
 		std::cout << std::endl << std::endl;
 	}
+	{
+		std::cout << RED << "----------------------------------" << DEFAULT << std::endl;
+		const int	arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+		size_t len = sizeof(arr) / sizeof(arr[0]);
+		
+		std::cout << RED << "Elements of an const integer array" << DEFAULT << std::endl;
+		iter(arr, len, print<int>);
+		std::cout << std::endl << std::endl;
+
+		// std::cout << RED << "addOne function iteration" << DEFAULT << std::endl;
+		// iter(arr, len, addOne<int>);
+		// std::cout << std::endl << std::endl;
+	}
 }

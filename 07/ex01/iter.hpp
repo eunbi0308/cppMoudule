@@ -26,3 +26,11 @@ void	changeValue(T& element)
 	element = 'A';
 	print(element);
 }
+
+template <typename T, typename Func>
+void iter(const T* array, size_t len, Func func)
+{
+    for (size_t i = 0; i < len; ++i)
+        func(array[i]);
+}
+

@@ -1,5 +1,18 @@
 #pragma once
 #include "Array.hpp"
+#include <stdexcept>
+
+class OutOfBoundsException : public std::exception
+{
+	private:
+		const std::string	message;
+	public:
+		OutOfBoundsException(const std::string& message) : message(message) {}
+		virtual const char *what() const throw()
+		{
+			return this->message.c_str();
+		}
+};
 
 template <typename T>
 Array<T>::Array() : ptr(new T[0]), arraySize(0)
@@ -58,18 +71,6 @@ Array<T> &Array<T>::operator=(const Array &other)
 }
 
 template <typename T>
-T& Array<T>::operator[](unsigned int index)
-{
-	#ifdef STRUCTOR
-		std::cout << GREY << "Script operator overloading called" << DEFAULT << std::endl; 
-	#endif
-	
-	if (index >= this->arraySize)
-		throw std::out_of_range("Array index out of bounds");
-	return this->ptr[index];
-}
-
-template <typename T>
 Array<T>::~Array()
 {
 	#ifdef STRUCTOR
@@ -77,6 +78,18 @@ Array<T>::~Array()
 	#endif
 	if (this->ptr != nullptr)
 		delete[] this->ptr;
+}
+
+template <typename T>
+T& Array<T>::operator[](unsigned int index)
+{
+	#ifdef STRUCTOR
+		std::cout << GREY << "Script operator overloading called" << DEFAULT << std::endl; 
+	#endif
+	
+	if (index >= this->arraySize)
+		throw OutOfBoundsException("Array index out of bounds");
+	return this->ptr[index];
 }
 
 

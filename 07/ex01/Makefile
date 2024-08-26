@@ -1,4 +1,4 @@
-NAME		=	iter
+NAME		=	Iter
 CC			=	c++
 
 ifdef DEBUG
