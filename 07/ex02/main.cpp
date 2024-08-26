@@ -36,6 +36,17 @@ int main()
 		for (unsigned int i = 0; i < intArr2.size(); ++i)
 			std::cout << "intArr2[" << i << "] : " << intArr2[i] << "\n";
 
+		std::cout << GREY << "Modifying intArr2 elements...\n" << DEFAULT;
+		for (unsigned int i = 0; i < intArr2.size(); ++i)
+		{
+			intArr2[i] += 10;
+			std::cout << "intArr2[" << i << "] : " << intArr2[i] << "\n";
+		}
+
+		std::cout << BLUE << "___ intArr elements value" << "\n" << DEFAULT;
+			for (unsigned int i = 0; i < intArr.size(); ++i)
+				std::cout << "intArr[" << i << "] : " << intArr[i] << "\n";
+
 		std::cout << BLUE << "___ Copy assignment operater" << "\n" << DEFAULT;
 		Array<int> intArr3;
 		intArr3 = intArr;
