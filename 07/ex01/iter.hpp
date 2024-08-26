@@ -19,3 +19,10 @@ void	addOne(T& num)
 	num += 1;
 	print(num);
 }
+
+template <typename T>
+void	changeValue(T& element)
+{
+	element = 'A';
+	print(element);
+}

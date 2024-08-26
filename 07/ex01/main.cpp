@@ -27,6 +27,23 @@ int main()
 		std::cout << RED << "Elements of a char array" << DEFAULT << std::endl;
 		iter(arr, len, print<char>);
 		std::cout << std::endl << std::endl;
+
+		std::cout << RED << "changeValue function iteration" << DEFAULT << std::endl;
+		iter(arr, len, changeValue<char>);
+		std::cout << std::endl << std::endl;
+	}
+	{
+		std::cout << RED << "----------------------------------" << DEFAULT << std::endl;
+		std::string	arr[] = {"aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii"};
+		size_t len = sizeof(arr) / sizeof(arr[0]);
+		
+		std::cout << RED << "Elements of a string array" << DEFAULT << std::endl;
+		iter(arr, len, print<std::string>);
+		std::cout << std::endl << std::endl;
+
+		std::cout << RED << "changeValue function iteration" << DEFAULT << std::endl;
+		iter(arr, len, changeValue<std::string>);
+		std::cout << std::endl << std::endl;
 	}
 	{
 		std::cout << RED << "----------------------------------" << DEFAULT << std::endl;

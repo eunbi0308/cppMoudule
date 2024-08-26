@@ -5,6 +5,7 @@
 int main()
 {
 	{
+		// Creates a new integer object on the heap, which initially has value of 0.
 		int *a = new int();
 		std::cout << *a << "\n";
 		delete a;

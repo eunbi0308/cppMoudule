@@ -15,6 +15,7 @@ Array<T>::Array(unsigned int n) : ptr(new T[n]), arraySize(n)
 	#ifdef STRUCTOR
 		std::cout << GREY << "Array unsigned int constructor called" << DEFAULT << std::endl; 
 	#endif
+
 }
 
 template <typename T>
@@ -47,7 +48,7 @@ Array<T> &Array<T>::operator=(const Array &other)
 		this->ptr = new T[this->arraySize];
 		for (unsigned int i = 0; i < this->arraySize; ++i)
 		{
-			ptr[i] = other.ptr[i];
+			this->ptr[i] = other.ptr[i];
 		}
 	}
 	return *this;
@@ -60,9 +61,9 @@ T& Array<T>::operator[](unsigned int index)
 		std::cout << GREY << "Script operator overloading called" << DEFAULT << std::endl; 
 	#endif
 	
-	if (index >= arraySize)
+	if (index >= this->arraySize)
 		throw std::out_of_range("Array index out of bounds");
-	return ptr[index];
+	return this->ptr[index];
 }
 
 template <typename T>
