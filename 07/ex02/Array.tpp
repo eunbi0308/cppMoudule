@@ -15,7 +15,10 @@ Array<T>::Array(unsigned int n) : ptr(new T[n]), arraySize(n)
 	#ifdef STRUCTOR
 		std::cout << GREY << "Array unsigned int constructor called" << DEFAULT << std::endl; 
 	#endif
-
+	for (size_t i = 0; i < this->size(); ++i)
+	{
+		(*this)[i] = T();
+	}
 }
 
 template <typename T>
