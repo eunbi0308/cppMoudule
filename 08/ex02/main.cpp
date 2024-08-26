@@ -218,8 +218,8 @@ int main()
 		}
 	}
 	{
-		std::cout << GREEN << "___ Constant interator" << "\n" << DEFAULT;
-		
+		std::cout << PURPLE << "\n_____ Iterators test\n\n" << DEFAULT;
+		std::cout << GREEN << "___ Reverse interator" << "\n" << DEFAULT;
 		MutantStack<int> mstack;
 
 		mstack.push(1);
@@ -228,15 +228,36 @@ int main()
 		mstack.push(4);
 		mstack.push(5);
 
+		MutantStack<int>::reverse_iterator r_it = mstack.rbegin();
+		MutantStack<int>::reverse_iterator r_ite = mstack.rend();
+
+		while (r_it != r_ite)
+		{
+			std::cout << *r_it << std::endl;
+			++r_it;
+		}
+		std::cout << PINK << "POP" << "\n" << DEFAULT;
+		mstack.pop();
+		r_it = mstack.rbegin();
+		r_ite = mstack.rend();
+		while (r_it != r_ite)
+		{
+			std::cout << *r_it << std::endl;
+			++r_it;
+		}
+
+		std::cout << GREEN << "___ Constant interator" << "\n" << DEFAULT;
+		
+		
 		MutantStack<int>::const_iterator it = mstack.begin();
 		MutantStack<int>::const_iterator ite = mstack.end();
 
-		std::cout  << "< elements >" << "\n" << DEFAULT;
 		while (it != ite)
 		{
 			std::cout << *it << std::endl;
 			++it;
 		}
+
 		std::cout << PINK << "Attempt to modify a value" << "\n" << DEFAULT;
 		// *it = 88;	
 	}

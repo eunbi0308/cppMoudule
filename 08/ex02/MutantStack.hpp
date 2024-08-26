@@ -36,12 +36,20 @@ class MutantStack : public std::stack<Type>
         */
         using iterator = typename std::stack<Type>::container_type::iterator;
         using const_iterator = typename std::stack<Type>::container_type::const_iterator;
+        using reverse_iterator = typename std::stack<Type>::container_type::reverse_iterator;
+        using const_reverse_iterator = typename std::stack<Type>::container_type::const_reverse_iterator;
 
         // Iterator access functions
         iterator begin() { return this->c.begin(); }
         iterator end() { return this->c.end(); }
         const_iterator cbegin() { return this->c_begin(); }
         const_iterator cend() { return this->c_end(); }
+
+        // Reverse iterator access functions
+        reverse_iterator rbegin() { return this->c.rbegin(); }
+        reverse_iterator rend() { return this->c.rend(); }
+        const_reverse_iterator crbegin() { return this->c_rbegin(); }
+        const_reverse_iterator crend() { return this->c_rend(); }
 };
 
 #include "MutantStack.tpp"
