@@ -46,7 +46,7 @@ Array<T> &Array<T>::operator=(const Array &other)
 	if (this != &other)
 	{
 		if (this->ptr != nullptr)
-			delete this->ptr;
+			delete[] this->ptr;
 		this->arraySize = other.arraySize;
 		this->ptr = new T[this->arraySize];
 		for (unsigned int i = 0; i < this->arraySize; ++i)
