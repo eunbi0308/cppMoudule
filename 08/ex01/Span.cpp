@@ -65,7 +65,7 @@ void	Span::addNumber(int num)
 
 void	Span::addNumbers(std::vector<int> nums)
 {
-	if (this->numbers.size() + nums.size() >= this->maxSize)
+	if (this->numbers.size() + nums.size() > this->maxSize)
 		throw std::runtime_error("Exceeding maximum storage size");
 	
 	if (std::adjacent_find(nums.begin(), nums.end()) != nums.end())

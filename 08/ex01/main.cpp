@@ -42,7 +42,7 @@ int main()
 
             std::cout << "\n";
             std::cout << PURPLE << "Copy contructor\n" << DEFAULT;
-            Span sp1(5);
+            Span sp1(6);
             std::cout << GREY << "Adding numbers..." << '\n' << DEFAULT;
             sp1.addNumbers(vectorInt);
             
@@ -201,7 +201,6 @@ int main()
         std::cout << GREEN << "\n_____ Large numbers test\n\n" << DEFAULT;
         try
 		{
-            std::cout << "\n";
 			std::cout << PURPLE << "10000\n" << DEFAULT;
             Span sp;
             
