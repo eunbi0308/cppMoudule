@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <random>
+#include <unordered_set>
 
 std::vector<int> generateUniqueRandomNumbers(unsigned int count, int min, int max);
 
@@ -183,6 +184,18 @@ int main()
         {
             std::cerr << RED <<  e.what() << "\n" << DEFAULT;
         }
+        try
+		{
+            std::cout << "\n";
+			std::cout << PURPLE << "Attempting to add a duplicated numbers contained container(addNumbers)\n" << DEFAULT;
+            Span sp;
+            std::vector<int> vectorInt = {1, 1, 2, 3};
+            sp.addNumbers(vectorInt);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << RED <<  e.what() << "\n" << DEFAULT;
+        }
     }
     {
         std::cout << GREEN << "\n_____ Large numbers test\n\n" << DEFAULT;
@@ -192,12 +205,12 @@ int main()
 			std::cout << PURPLE << "10000\n" << DEFAULT;
             Span sp;
             
-            std::vector<int> randomNumbers = generateUniqueRandomNumbers(10000, 0, 10000);
-            sp.addNumbers(randomNumbers);
-
-            // for (const auto& i: sp.getNumbers())
+            std::vector<int> randomNumbers = generateUniqueRandomNumbers(1000, 0, 1000);
+            // for (const auto& i: randomNumbers)
             //     std::cout << i << " ";
             // std::cout << "\n";
+            sp.addNumbers(randomNumbers);
+
             std::cout << "Shortest : " << sp.shortestSpan() << std::endl;
             std::cout << "Longest : " << sp.longestSpan() << std::endl;
         }
@@ -214,9 +227,6 @@ int main()
             std::vector<int> randomNumbers = generateUniqueRandomNumbers(100000, 0, 100000);
             sp.addNumbers(randomNumbers);
 
-            // for (const auto& i: sp.getNumbers())
-            //     std::cout << i << " ";
-            // std::cout << "\n";
             std::cout << "Shortest : " << sp.shortestSpan() << std::endl;
             std::cout << "Longest : " << sp.longestSpan() << std::endl;
         }
@@ -233,9 +243,6 @@ int main()
             std::vector<int> randomNumbers = generateUniqueRandomNumbers(1000000, 0, 1000000);
             sp.addNumbers(randomNumbers);
 
-            // for (const auto& i: sp.getNumbers())
-            //     std::cout << i << " ";
-            // std::cout << "\n";
             std::cout << "Shortest : " << sp.shortestSpan() << std::endl;
             std::cout << "Longest : " << sp.longestSpan() << std::endl;
         }
@@ -249,15 +256,23 @@ int main()
 
 std::vector<int> generateUniqueRandomNumbers(unsigned int count, int min, int max)
 {
-    if (count > static_cast<unsigned int>(max - min + 1)) {
+    if (count > static_cast<unsigned int>(max - min + 1))
         throw std::invalid_argument("Count exceeds range of possible values");
+
+    std::vector<int> numbers;
+    numbers.reserve(count);
+
+    std::mt19937 range;
+    range.seed(std::random_device()());
+    std::uniform_int_distribution<int> dist(min, max);
+
+    std::unordered_set<int> seen;
+    while (numbers.size() < count) 
+    {
+        int num = dist(range);
+        if (seen.insert(num).second)
+            numbers.push_back(num);
     }
-    std::vector<int> numbers(max - min + 1);
-    std::iota(numbers.begin(), numbers.end(), min);
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::shuffle(numbers.begin(), numbers.end(), gen);
-
-    return std::vector<int>(numbers.begin(), numbers.begin() + count);
+    return numbers;
 }

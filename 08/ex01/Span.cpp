@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <sstream>
+#include <algorithm>
 
 Span::Span() : maxSize(__UINT32_MAX__)
 {
@@ -66,11 +67,12 @@ void	Span::addNumbers(std::vector<int> nums)
 {
 	if (this->numbers.size() + nums.size() >= this->maxSize)
 		throw std::runtime_error("Exceeding maximum storage size");
-
+	
+	if (std::adjacent_find(nums.begin(), nums.end()) != nums.end())
+		throw std::runtime_error("Given container contains duplicated numbers.");
 	for (const auto& i : nums)
 	{
-		if (std::find(this->numbers.begin(), this->numbers.end(), i) != this->numbers.end()
-			|| std::find(nums.begin(), nums.end(), i) != nums.end())
+		if (std::find(this->numbers.begin(), this->numbers.end(), i) != this->numbers.end())
 		{
 			std::stringstream ss;
 			ss << "'" << i << "' already exists";
