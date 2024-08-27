@@ -99,7 +99,7 @@ int main()
     }
     {
 		std::cout << GREEN << "\n_____ Error test\n\n" << DEFAULT;
-		try
+        try
 		{
 			std::cout << PURPLE << "No number\n" << DEFAULT;
             Span sp;
