@@ -1,6 +1,7 @@
 #include "easyfind.hpp"
 #include <list>
 #include <deque>
+#include <array>
 
 template<typename T>
 void	initContainerElements(T &container)
@@ -101,6 +102,34 @@ int main()
 			std::cout << PURPLE << "Find '10' in deque<int> => Error\n" << DEFAULT;
 			it = easyfind(dequeInt, 10);
 			if (it == dequeInt.end())
+				throw std::runtime_error("Value not found in the container.");
+			else
+				std::cout << "Found " << *it << '\n';
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << RED << e.what() << '\n' << DEFAULT;
+		}
+	}
+	{
+		std::cout << GREEN << "\n_____ Basic test (std:array<int>)\n\n" << DEFAULT;
+		try
+		{
+			std::array<int, 10> arrayInt = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+			std::cout << PURPLE << "Elements in array<int>\n" << DEFAULT;
+			printElements(arrayInt);
+			std::cout << '\n';
+
+			std::cout << PURPLE << "Find '1' in array<int> => Found\n" << DEFAULT;
+			auto it = easyfind(arrayInt, 1);
+			if (it == arrayInt.end())
+				throw std::runtime_error("Value not found in the container.");
+			else
+				std::cout << "Found " << *it << '\n';
+			
+			std::cout << PURPLE << "Find '10' in array<int> => Error\n" << DEFAULT;
+			it = easyfind(arrayInt, 10);
+			if (it == arrayInt.end())
 				throw std::runtime_error("Value not found in the container.");
 			else
 				std::cout << "Found " << *it << '\n';
