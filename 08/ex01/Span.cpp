@@ -69,7 +69,8 @@ void	Span::addNumbers(std::vector<int> nums)
 
 	for (const auto& i : nums)
 	{
-		if (std::find(this->numbers.begin(), this->numbers.end(), i) != this->numbers.end())
+		if (std::find(this->numbers.begin(), this->numbers.end(), i) != this->numbers.end()
+			|| std::find(nums.begin(), nums.end(), i) != nums.end())
 		{
 			std::stringstream ss;
 			ss << "'" << i << "' already exists";
