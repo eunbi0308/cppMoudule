@@ -23,7 +23,7 @@
  */
 
 template <class Type, class Container = std::deque <Type>>
-class MutantStack : public std::stack<Type>
+class MutantStack : public std::stack<Type, Container>
 {
     public:
         MutantStack();
@@ -32,12 +32,12 @@ class MutantStack : public std::stack<Type>
         ~MutantStack();
 
         /** 
-         * Define aliases for the iterator types of ther underlying std::stack container.
+         * Define aliases for the iterator types of ther underlying container.
         */
-        using iterator = typename std::stack<Type>::container_type::iterator;
-        using const_iterator = typename std::stack<Type>::container_type::const_iterator;
-        using reverse_iterator = typename std::stack<Type>::container_type::reverse_iterator;
-        using const_reverse_iterator = typename std::stack<Type>::container_type::const_reverse_iterator;
+        using iterator = typename Container::iterator;
+        using const_iterator = typename Container::const_iterator;
+        using reverse_iterator = typename Container::reverse_iterator;
+        using const_reverse_iterator = typename Container::const_reverse_iterator;
 
         // Iterator access functions
         iterator begin() { return this->c.begin(); }

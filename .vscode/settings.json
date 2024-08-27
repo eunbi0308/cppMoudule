@@ -63,6 +63,13 @@
 		"charconv": "cpp",
 		"complex": "cpp",
 		"format": "cpp",
-		"variant": "cpp"
+		"variant": "cpp",
+		"csignal": "cpp",
+		"forward_list": "cpp",
+		"set": "cpp",
+		"unordered_set": "cpp",
+		"semaphore": "cpp",
+		"stop_token": "cpp",
+		"thread": "cpp"
 	}
 }

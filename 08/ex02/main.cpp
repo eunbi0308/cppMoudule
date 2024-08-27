@@ -18,7 +18,6 @@ int main()
 		mstack.push(3);
 		mstack.push(5);
 		mstack.push(737);
-		//[...]
 		mstack.push(0);
 
 		MutantStack<int>::iterator it = mstack.begin();
@@ -57,7 +56,6 @@ int main()
 		listStack.push_back(3);
 		listStack.push_back(5);
 		listStack.push_back(737);
-		//[...]
 		listStack.push_back(0);
 
 		std::list<int>::iterator it = listStack.begin();
@@ -186,33 +184,21 @@ int main()
 		}
 	}
 	{
-		std::cout << GREEN << "___ Change value of stack elements by using iterator" << "\n" << DEFAULT;
-		
-		MutantStack<int> mstack;
+		std::cout << PURPLE << "\n_____ Underlying container test\n\n" << DEFAULT;
+		std::cout << GREEN << "___ std::vector container" << "\n" << DEFAULT;
 
+		MutantStack<int, std::vector<int>> mstack;
 		mstack.push(1);
 		mstack.push(2);
 		mstack.push(3);
 		mstack.push(4);
 		mstack.push(5);
 
-		MutantStack<int>::iterator it = mstack.begin();
-		MutantStack<int>::iterator ite = mstack.end();
+		MutantStack<int, std::vector<int>>::iterator it = mstack.begin();
+		MutantStack<int, std::vector<int>>::iterator ite = mstack.end();
 
-		std::cout << PINK << "Adding 10 to each numbers..." << "\n" << DEFAULT;
 		while (it != ite)
 		{
-			*it += 10;
-			std::cout << *it << std::endl;
-			++it;
-		}
-
-		std::cout << PINK << "Changing all numbers into 88..." << "\n" << DEFAULT;
-		it = mstack.begin();
-		ite = mstack.end();
-		while (it != ite)
-		{
-			*it = 88;
 			std::cout << *it << std::endl;
 			++it;
 		}
