@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/btc.dir/btc_test.cpp.o CMakeFiles/btc.dir/BitcoinExchange.cpp.o -o btc  lib/libgtest.a 

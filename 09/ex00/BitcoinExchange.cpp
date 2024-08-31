@@ -1,4 +1,5 @@
 #include "BitcoinExchange.hpp"
+#include <cctype>
 
 Bitcoin::Bitcoin()
 {
@@ -32,14 +33,19 @@ Bitcoin::~Bitcoin()
 	#endif
 }
 
-std::map<int, double> Bitcoin::getBcData()
+std::map<int, float> Bitcoin::getBcData()
 {
 	return this->bcData;
 }
 
-void Bitcoin::setBcData(std::map<int, double> data)
+void Bitcoin::setBcData(std::map<int, float> data)
 {
 	this->bcData = data;
+}
+
+bool isLeapYear(int year) 
+{
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
 bool    checkDateValidation(const std::string &date)
@@ -48,39 +54,65 @@ bool    checkDateValidation(const std::string &date)
 	std::tm ymd;
 
 	ss >> std::get_time(&ymd, "%Y-%m-%d");
+
+	// Check if parsing was successful and mktime returns a valid 
+	int year = ymd.tm_year + 1900;
+	int month = ymd.tm_mon + 1;
+	int day = ymd.tm_mday;
 	if (ss.fail())
 		return false;
+	if (month == 2 && (day > 29 || (day == 29 && !isLeapYear(year))))
+        return false; // Invalid day for February (non-leap year)
+
 	return true;
 }
 
 float   Bitcoin::exchange(int date, float value)
 {
 	auto it = this->bcData.begin();
-	while (it->first <= date)
+	while (it->first <= date && it != this->bcData.end())
 		it++;
 	--it;
 	if (it != this->bcData.end())
 	{
 		// std::cout << GREY << "date: " << it->first << '\n';
-		// std::cout << "value : " << it->second << '\n' << DEFAULT;
+		// std::cout << "value : " << std::fixed << std::setprecision(2) << it->second << '\n' << DEFAULT;
 		return it->second * value;
 	}
 	return -1;
 }
 
-// std::string trim(const std::string &str, const char c)
-// {
-// 	std::string result(str);
+bool containsNonDigit(const std::string& str)
+{
+	for (char c : str)
+	{
+		if (!std::isdigit(c))
+		{
+			if (str.length() == 1)
+				return true;
+			else if (str.length() > 1 && c != '.' && c != '-' && c != '+')
+				return true;
+		}	
+	}
+	return false;
+}
 
-// 	auto const first{ result.find_first_not_of(c) };
-// 	if (std::string::npos == first)
-// 		return {};
-// 	auto const	last{ result.find_last_not_of(c) };
+bool	Bitcoin::isDateWithinRange(int dateInt)
+{
+	auto begin = this->bcData.begin();
+	auto end = this->bcData.rbegin();
+	int	beginDate = begin->first;
+	int	endDate = end->first;
+	if (dateInt < beginDate || dateInt > endDate)
+	{
+		std::cout << "Error: The date must be between " << beginDate <<  " and " << endDate << '\n';
+		return false;
+	}
+	return true;
 
-// 	return result.substr(first, (last - first + 1));
-// }
+}
 
-void Bitcoin::calcualteAndPrint(std::string filename)
+void Bitcoin::calculateAndPrint(std::string filename)
 {
 	std::ifstream file(filename);
 
@@ -100,16 +132,28 @@ void Bitcoin::calcualteAndPrint(std::string filename)
 					std::cout << "Error: bad input => " << dateStr << '\n';
 				else
 				{
-					ss >> value;
-					if (value < 0)
-						std::cout << "Error: not a positive number.\n";
-					else if (value > 1000)
-						std::cout << "Error: too large a number.\n";
+					std::string valueStr;
+					ss >> valueStr;
+					if (valueStr.empty())
+						std::cout << "Error: The value is empty.\n";
+					else if (containsNonDigit(valueStr) == true)
+						std::cout << "Error: non-digit character is contained.\n";
 					else
 					{
-						int dateInt = convertDate(dateStr);
-						float exchangedValue = exchange(dateInt, value);
-						std::cout << dateStr << "=> " << value << " = " << exchangedValue << "\n";
+						value = std::stof(valueStr);
+						if (value < 0)
+							std::cout << "Error: not a positive number.\n";
+						else if (value > 1000)
+							std::cout << "Error: too large a number.\n";
+						else
+						{
+							int dateInt = convertDate(dateStr);
+							if (isDateWithinRange(dateInt) == true)
+							{
+								float exchangedValue = exchange(dateInt, value);
+								std::cout << dateStr << "=> " << value << " = " << exchangedValue << "\n";
+							}
+						}
 					}
 				} 
 			}

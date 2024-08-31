@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _BITCOINEXCHANGE_H
+#define _BITCOINEXCHANGE_H
 
 # define GREEN "\033[0;92m"
 # define YELLOW "\e[38;5;208m"
@@ -20,10 +21,11 @@
 #include <iterator>
 #include <vector>
 
+
 class Bitcoin
 {
     private:
-        std::map<int, double> bcData;
+        std::map<int, float> bcData;
 
     public:
         Bitcoin();
@@ -31,11 +33,14 @@ class Bitcoin
         Bitcoin& operator=(const Bitcoin& other);
         ~Bitcoin();
     
-        std::map<int, double> getBcData();
-        void    setBcData(std::map<int, double> data);
-        void    calcualteAndPrint(std::string filename);
+        std::map<int, float> getBcData();
+        void    setBcData(std::map<int, float> data);
+        void    calculateAndPrint(std::string filename);
         float   exchange(int date, float value);
+        bool    isDateWithinRange(int dateInt);
         // int     convertDate(const std::string& date);
 };
 
 int	convertDate(const std::string& date);
+
+#endif

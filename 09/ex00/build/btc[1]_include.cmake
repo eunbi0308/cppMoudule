@@ -1,0 +1,5 @@
+if(EXISTS "/home/eunbi/Desktop/cpp/09/ex00/build/btc[1]_tests.cmake")
+  include("/home/eunbi/Desktop/cpp/09/ex00/build/btc[1]_tests.cmake")
+else()
+  add_test(btc_NOT_BUILT btc_NOT_BUILT)
+endif()

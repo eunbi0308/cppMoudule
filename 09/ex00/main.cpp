@@ -27,11 +27,11 @@ int	convertDate(const std::string& date)
 	return std::stoi(result);
 }
 
-std::map<int, double>    parseDatabase(std::string database)
+std::map<int, float>    parseDatabase(std::string database)
 {
 	checkFileValidation(database);
 
-	std::map<int, double> data = {};
+	std::map<int, float> data = {};
 	std::ifstream file(database);
 
 	if (file.is_open())
@@ -42,11 +42,12 @@ std::map<int, double>    parseDatabase(std::string database)
 		{
 			std::stringstream ss(line);
 			std::string dateStr;
-			double exchangeRate;
+			float exchangeRate;
 			
 			if (getline(ss, dateStr, ',') && (ss >> exchangeRate))
 			{
 				int date = convertDate(dateStr);
+
 				data[date] = exchangeRate;
 			}
 		}
@@ -68,10 +69,10 @@ int main(int argc, char *argv[])
 
 		std::string database = "data.csv";
 		Bitcoin bc;
-		std::map<int, double> data = parseDatabase(database);
+		std::map<int, float> data = parseDatabase(database);
 		if (!data.empty())
 			bc.setBcData(data);
-		bc.calcualteAndPrint(filename);
+		bc.calculateAndPrint(filename);
 		// for (const auto& entry : bc.getBcData())
 		// {
 		//     std::cout << "date : " << entry.first << "|" << "\n";
