@@ -150,7 +150,7 @@ class OutputCaptureFixture : public testing::Test
         std::streambuf* oldCoutBuf;
 };
 
-TEST_F(OutputCaptureFixture, subject_test)
+TEST_F(OutputCaptureFixture, input)
 {
     std::string output = captureOutputToFile("../input.txt");
 
@@ -169,7 +169,7 @@ TEST_F(OutputCaptureFixture, subject_test)
     EXPECT_EQ(output, correctResult);
 }
 
-TEST_F(OutputCaptureFixture, error_handling)
+TEST_F(OutputCaptureFixture, input2)
 {
     std::string output = captureOutputToFile("../input2.txt");
 
@@ -201,7 +201,40 @@ TEST_F(OutputCaptureFixture, error_handling)
     std::string correctResult = ss.str();
 
     EXPECT_EQ(output, correctResult);
+}
 
+TEST_F(OutputCaptureFixture, badinput)
+{
+    std::string output = captureOutputToFile("../error_files/badinput.txt");
+
+    std::stringstream ss; 
+    ss << "Error: bad input => 2001-42-42\n"
+        << "Error: bad input => 2011-02-31 \n" 
+        << "Error: bad input => 2011-13-31 \n" 
+        << "Error: bad input => 1 \n" 
+        << "Error: bad input => abc \n" 
+        << "Error: The date must be between 20090102 and 20220329\n"
+        << "Error: The date must be between 20090102 and 20220329\n";
+    std::string correctResult = ss.str();
+
+    EXPECT_EQ(output, correctResult);
+}
+
+TEST_F(OutputCaptureFixture, valueError)
+{
+    std::string output = captureOutputToFile("../error_files/valueError.txt");
+
+    std::stringstream ss; 
+    ss << "Error: not a positive number.\n"
+        << "Error: non-digit character is contained.\n"
+        << "Error: non-digit character is contained.\n"
+        << "Error: too large a number.\n"
+        << "Error: non-digit character is contained.\n"
+        << "Error: non-digit character is contained.\n"
+        << "Error: The value is empty.\n";
+    std::string correctResult = ss.str();
+
+    EXPECT_EQ(output, correctResult);
 }
 
 

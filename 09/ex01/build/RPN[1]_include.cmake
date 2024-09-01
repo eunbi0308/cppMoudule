@@ -1,0 +1,5 @@
+if(EXISTS "/home/eunbi/Desktop/cpp/09/ex01/build/RPN[1]_tests.cmake")
+  include("/home/eunbi/Desktop/cpp/09/ex01/build/RPN[1]_tests.cmake")
+else()
+  add_test(RPN_NOT_BUILT RPN_NOT_BUILT)
+endif()
