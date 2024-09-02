@@ -30,12 +30,35 @@ bool    isValidChar(const std::string &str)
     return true;
 }
 
+bool    isValidSyntax(const std::string& expression)
+{
+    std::stack<char> stack;
+
+    for (char c : expression)
+    {
+        if (isdigit(c))
+            stack.push(c);
+        else if (isOperator(c))
+        {
+            if (stack.size() < 2)
+                return false; // Operator needs at least two operands
+            stack.pop();
+            stack.pop();
+            stack.push(c);
+        }
+    }
+
+    return stack.size() == 1; // Valid RPN expression has exactly one left
+}
+
 std::stack<char>    parseExpression(const std::string& expression)
 {
     std::stringstream   ss(expression);
     std::string         line;
     std::stack<char>     stack = {};
 
+    if (isValidSyntax(expression) == false)
+        throw std::runtime_error("Invalid syntax.");
     while (std::getline(ss, line, ' '))
     {
         if (isValidChar(line) == false)
@@ -60,14 +83,14 @@ int main(int argc, char **argv)
 
         RPN rpn;
         rpn.setStack(parseExpression(expression));
-        std::stack<char> printStack = parseExpression(expression);
-        std::stack<char> temp;
-        while (!printStack.empty()) 
-        {
-            temp.push(printStack.top());
-            printStack.pop();
-            std::cout << temp.top() << " ";
-        }
+        // std::stack<char> printStack = parseExpression(expression);
+        // std::stack<char> temp;
+        // while (!printStack.empty()) 
+        // {
+        //     temp.push(printStack.top());
+        //     printStack.pop();
+        //     std::cout << temp.top() << " ";
+        // }
         std::cout << "\n";
         int result = rpn.calculate();
         std::cout << GREEN << result << '\n' << DEFAULT;

@@ -16,6 +16,27 @@ bool    isValidChar(const std::string &str)
     return true;
 }
 
+bool    isValidSyntax(const std::string& expression)
+{
+    std::stack<char> stack;
+
+    for (char c : expression)
+    {
+        if (isdigit(c))
+            stack.push(c);
+        else if (isOperator(c))
+        {
+            if (stack.size() < 2)
+                return false; // Operator needs at least two operands
+            stack.pop();
+            stack.pop();
+            stack.push(c);
+        }
+    }
+
+    return stack.size() == 1; // Valid RPN expression has exactly one left
+}
+
 std::stack<char>    parseExpression(const std::string& expression)
 {
     std::stringstream   ss(expression);
@@ -38,18 +59,43 @@ std::stack<char>    parseExpression(const std::string& expression)
 
 /**********************TESTS*************************/
 
+TEST(Parsing, invalid_syntax)
+{
+    EXPECT_FALSE(isValidSyntax("1 + 1"));
+    EXPECT_FALSE(isValidSyntax("1 +"));
+    EXPECT_FALSE(isValidSyntax("8 9 * 9 - 9 - 9 - 4 - 1 + 1"));
+}
+
+TEST(Parsing, valid_syntax)
+{
+    EXPECT_TRUE(isValidSyntax("1"));
+    EXPECT_TRUE(isValidSyntax("1 1 +"));
+    EXPECT_TRUE(isValidSyntax("8 9 * 9 - 9 - 9 - 4 - 1 +"));
+}
+
 TEST(Parsing, invalid_char)
 {
     EXPECT_THROW(parseExpression("(1 + 1)"), std::runtime_error);
     EXPECT_THROW(parseExpression("abc"), std::runtime_error);
+    EXPECT_THROW(parseExpression("11 1 +"), std::runtime_error);
+    EXPECT_THROW(parseExpression("11 1 +"), std::runtime_error);
 }
 
-TEST(Parsing, calculate)
+TEST(Executing, calculate)
 {
     RPN rpn;
 
     rpn.setStack(parseExpression("8 9 * 9 - 9 - 9 - 4 - 1 +"));
     EXPECT_EQ(rpn.calculate(), 42);
+
+    rpn.setStack(parseExpression("7 7 * 7 -"));
+    EXPECT_EQ(rpn.calculate(), 42);
+
+    rpn.setStack(parseExpression("1 2 * 2 / 2 * 2 4 - +"));
+    EXPECT_EQ(rpn.calculate(), 0);
+
+    rpn.setStack(parseExpression("-"));
+    EXPECT_THROW(rpn.calculate(), std::runtime_error);
 }
 
 int main(int argc, char* argv[])
