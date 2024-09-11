@@ -2,7 +2,9 @@
 #include <string>
 #include <vector>
 #include <deque>
+#include <list>
 #include <sstream>
+
 
 template <typename Container>
 void    parseNumbers(const std::string &input, Container &container)
@@ -24,19 +26,24 @@ int main(int argc, char* argv[])
     std::string input = argv[1];
     std::cout << "Before: " << input << "\n";
 
-    std::vector<int> intVector;
+    std::vector<int> intVector; 
+    std::list<int>  intList;
     std::deque<int> intDeque;
 
     parseNumbers(input, intVector);
-    parseNumbers(input, intDeque);
+    // parseNumbers(input, intDeque);
+    // parseNumbers(input, intList);
 
-    auto mer
-    std::stringstream ss;
-    for (int num : output)
-    {
-        ss << num << " ";
-    }
+    mergeInsertionSort(intVector);
+    // mergeInsertionSort(intDeque);
+    // mergeInsertionSort(intList);
+    
+    // std::stringstream ss;
+    // for (int num : output)
+    // {
+    //     ss << num << " ";
+    // }
 
-    std::cout << "After: " << ss.str() << "\n";
+    // std::cout << "After: " << ss.str() << "\n";
     return 0;
 }

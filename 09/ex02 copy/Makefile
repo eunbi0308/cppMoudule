@@ -6,7 +6,7 @@ CPPFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g
 else ifdef STRUCTOR
 CPPFLAGS	=	-Wall -Wextra -Werror -g -D STRUCTOR
 else
-CPPFLAGS	=	-Wall -Wextra -Werror
+CPPFLAGS	=	-Wall -Wextra -Werror -std=c++20
 endif
 
 SRC_FILE	=	main.cpp PmergeMe.cpp

@@ -1,0 +1,20 @@
+arr : 2 2 6 10 22 42 86  
+
+int prev; // prev index
+int curr; // current index
+int next; // next index to start to insert
+
+next = prev * 2 + curr; => finding next index
+curr = next;
+
+
+amount = 2^curr - curr;
+
+b1 is fixed as first.
+b1 = 2;
+b2 = 6
+b6 = 10
+b10 = 22
+b22 = 42
+b42 = 86
+b86 = 84 + 86 = 170 ....
