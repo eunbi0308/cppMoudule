@@ -12,22 +12,23 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
 
 // template <class T, class Alloc = std::allocator<T>>
 // class PmergeMe : public std::allocator<T>
 // {
-template <typename T, class Container>
-class PmergeMe : public Container<T>
-{
-    public:
-        PmergeMe();
-        PmergeMe(const PmergeMe &other);
-        PmergeMe& operator=(const PmergeMe &other);
-        ~PmergeMe();
+// template <typename T, class Container>
+// class PmergeMe : public Container<T>
+// {
+//     public:
+//         PmergeMe();
+//         PmergeMe(const PmergeMe &other);
+//         PmergeMe& operator=(const PmergeMe &other);
+//         ~PmergeMe();
 
-        Container<T> mergeInsertionSort(const std::string &str); 
-};
+//         Container<T> mergeInsertionSort(const std::string &str); 
+// };
 
-#include "PmergeMe.cpp"
-
+std::vector<int> vectorMergeInsertionSort(std::vector<int> &numbers);
+std::deque<int> dequeMergeInsertionSort(std::deque<int> &numbers);
 #endif
