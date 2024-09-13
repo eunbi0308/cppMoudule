@@ -25,7 +25,7 @@ void	printNumbers(auto &main, auto &pending, int j)
 	std::cout << "\n";
 }
 
-void	printSortePairs(auto &pairs)
+void	printSortedPairs(auto &pairs)
 {
 	std::cout << PURPLE << "___sorted pairs___\n";
 	for (const auto& pair : pairs)
@@ -37,13 +37,11 @@ void	makeMainChainAndPendingElements(auto pairs, auto &main, auto &pending)
 {
 	// main : Mainchain of the pair. The bigger number of a pair.
 	// pend : Pending elements. The smaller number of a pair.
-
 	for (const auto &pair : pairs)
 	{
 		main.push_back(pair.first);
 		pending.push_back(pair.second);
 	}
-
 	#ifdef PRINT
 		std::cout << "main chain: ";
 		for (const auto &it : main)
@@ -54,7 +52,6 @@ void	makeMainChainAndPendingElements(auto pairs, auto &main, auto &pending)
 			std::cout << it << " ";
 		std::cout << "\n\n";
 	#endif
-	
 }
 
 int	jacobsthalNumbers(int num)
@@ -108,19 +105,16 @@ void	insertion(auto &main, auto &pending, int unpaired)
 	{
 		for (int j = jacobsthalNumbers(jacobNum); j > 0 && j > jacobsthalNumbers(jacobNum - 1); --j)
 		{
-			#ifdef PRINT
-				printMainChain(main);
-			#endif
 			auto it = pending.begin();
 			if (j >= pendingSize)
 				j = pendingSize - 1;
 			std::advance(it, j);
 			binarySearch(main, 0, main.size(), *it);
 			++i;
+
 			#ifdef PRINT
 				printNumbers(main, pending, j);
 			#endif
-
 		}
 		++jacobNum;
 	}
@@ -144,7 +138,6 @@ auto makePairs(const auto &numbers, auto &pairs)
 {
 	// using valueType = typename Container::value_type;
 	// using pairType = std::pair<valueType, valueType>;
-
 	int	size = numbers.size();
 
 	for (int i = 0; i < size; i += 2)
@@ -198,7 +191,7 @@ std::deque<int> dequeMergeInsertionSort(std::deque<int> &numbers)
     size_t i = 0;
 	sortPairs(i, pairs);
 	#ifdef PRINT
-		printSortePairs(pairs);
+		printSortedPairs(pairs);
 	#endif
 	std::deque<int> main, pending;
 	makeMainChainAndPendingElements(pairs, main, pending);

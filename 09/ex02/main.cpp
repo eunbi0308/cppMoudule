@@ -1,9 +1,8 @@
 #include "PmergeMe.hpp"
 #include <string>
-#include <vector>
-#include <deque>
 #include <sstream>
 #include <algorithm>
+#include <cstring>
 
 template <typename Container>
 int    parseNumbers(const std::string &input, Container &container)
@@ -27,8 +26,18 @@ int main(int argc, char* argv[])
     try
     {
         std::string input = "";
+        if (argc < 2)
+        {
+            std::cerr << RED << "USAGE: ./PmergeMe \"numbers\"\n";
+            return EXIT_FAILURE;
+        }
         for(int i = 1; i < argc; ++i)
         {
+            for (size_t j = 0; j < strlen(argv[i]); ++j)
+            {
+                if (!isdigit(argv[i][j]))
+                    throw std::runtime_error("Error: invalid input.");
+            }
             input += argv[i];
             if (i < argc - 1)
                 input += ' ';
@@ -53,7 +62,6 @@ int main(int argc, char* argv[])
         if (!(std::is_sorted(vectorOutput.begin(), vectorOutput.end())) 
             || !(std::is_sorted(dequeOutput.begin(), dequeOutput.end())))
             throw std::runtime_error("Error: incorrectly sorted.");
-
         // Print
         std::stringstream ss;
         for (int num : vectorOutput)
