@@ -91,7 +91,6 @@ int main(int argc, char **argv)
         //     printStack.pop();
         //     std::cout << temp.top() << " ";
         // }
-        std::cout << "\n";
         int result = rpn.calculate();
         std::cout << GREEN << result << '\n' << DEFAULT;
     } catch(const std::exception& e)
