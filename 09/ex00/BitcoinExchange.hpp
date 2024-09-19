@@ -19,8 +19,6 @@
 #include <regex>
 #include <string>
 #include <iterator>
-#include <vector>
-
 
 class Bitcoin
 {

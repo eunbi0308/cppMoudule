@@ -50,6 +50,10 @@ bool isLeapYear(int year)
 
 bool    checkDateValidation(const std::string &date)
 {
+	const std::regex date_regex("^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) $");
+	if ( !std::regex_match(date, date_regex))
+		return false;
+
 	std::istringstream ss(date);
 	std::tm ymd;
 
